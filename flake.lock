@@ -22,39 +22,6 @@
         "type": "github"
       }
     },
-    "aquamarine": {
-      "inputs": {
-        "hyprutils": [
-          "hyprland",
-          "hyprutils"
-        ],
-        "hyprwayland-scanner": [
-          "hyprland",
-          "hyprwayland-scanner"
-        ],
-        "nixpkgs": [
-          "hyprland",
-          "nixpkgs"
-        ],
-        "systems": [
-          "hyprland",
-          "systems"
-        ]
-      },
-      "locked": {
-        "lastModified": 1721571743,
-        "narHash": "sha256-hat7wggtDISBJD8kTo5MTrT+IsY/Ha2MwgjmqqijoCA=",
-        "owner": "hyprwm",
-        "repo": "aquamarine",
-        "rev": "601f6cf95cbe4fef02dc7faf34bba58566c914e9",
-        "type": "github"
-      },
-      "original": {
-        "owner": "hyprwm",
-        "repo": "aquamarine",
-        "type": "github"
-      }
-    },
     "browser-previews": {
       "inputs": {
         "flake-utils": "flake-utils",
@@ -770,7 +737,6 @@
     },
     "hyprland": {
       "inputs": {
-        "aquamarine": "aquamarine",
         "hyprcursor": "hyprcursor",
         "hyprlang": "hyprlang_2",
         "hyprutils": "hyprutils_2",
@@ -780,16 +746,17 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1721684218,
-        "narHash": "sha256-FbFz+F5LJs92s6/DEkhh2h+k8NRqqrs8MGF+GRZWZGo=",
-        "ref": "refs/heads/main",
-        "rev": "3c758db95c129ed6ca7ce0c1b5b82ad6e189488d",
-        "revCount": 4963,
+        "lastModified": 1719317162,
+        "narHash": "sha256-JmfnYz+9a4TjNl3mAus1VpoWtTI9d1xkW9MHbkcV0Po=",
+        "ref": "refs/tags/v0.41.2",
+        "rev": "918d8340afd652b011b937d29d5eea0be08467f5",
+        "revCount": 4886,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
       },
       "original": {
+        "ref": "refs/tags/v0.41.2",
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"

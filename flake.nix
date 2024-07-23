@@ -69,7 +69,10 @@
 
     # Hyprland
     hyprland = {
-      url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+      type = "git";
+      url = "https://github.com/hyprwm/Hyprland";
+      ref = "refs/tags/v0.41.2";
+      submodules = true;
     };
 
     hyprland-plugins = {
@@ -150,6 +153,7 @@
     };
 
     nixos-grub-themes.url = "github:jeslie0/nixos-grub-themes";
+
     browser-previews = {
       url = "github:nix-community/browser-previews";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -157,12 +161,7 @@
   };
 
   outputs =
-    inputs@{
-      self,
-      nixpkgs,
-      nix-github-actions,
-      ...
-    }:
+    inputs@{ self, nixpkgs, ... }:
     let
       inherit (self) outputs;
 
