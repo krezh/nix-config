@@ -15,7 +15,7 @@
     settings = import ./settings.nix;
     plugins = [
       inputs.hyprfocus.packages.${pkgs.system}.hyprfocus
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      # inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
       inputs.hyprsplit.packages.${pkgs.system}.hyprsplit
     ];
   };
