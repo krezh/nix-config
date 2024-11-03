@@ -857,11 +857,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1730646973,
-        "narHash": "sha256-1i9dWk0lf4JmguTy9zsJfpMToeOZ3Xr9tAStp7uE0vM=",
+        "lastModified": 1730652188,
+        "narHash": "sha256-3L+Jh3J3JvJPsGTqSOIKjwZy/AysR0WOLgGKNkXFqxs=",
         "ref": "refs/heads/main",
-        "rev": "180c26ada6233c3c59c331cb14a64aac1eeb2941",
-        "revCount": 5406,
+        "rev": "cd0d0491261728260de3d1aff150e1b6c05f9e86",
+        "revCount": 5407,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -1334,11 +1334,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730625581,
-        "narHash": "sha256-vFxtzNCxtUIrmv8tluquZHjNTwMkCGtT0NCoVuwlqd4=",
+        "lastModified": 1730652030,
+        "narHash": "sha256-uTToUpFphR9ywc+DQUD/8hmboOMFV1lBVFf/ztzdn6A=",
         "owner": "Jovian-Experiments",
         "repo": "Jovian-NixOS",
-        "rev": "e6195c6bfc037617e20d6d7d4d6c9cdeee6aba6d",
+        "rev": "e74e57a37de55ecfdc62f49fe5a7463b2a52499a",
         "type": "github"
       },
       "original": {
@@ -1392,7 +1392,7 @@
         "narHash": "sha256-zNW/rqNJwhq2lYmQf19wJerRuNimjhxHKmzrWWFJYts=",
         "rev": "622a2253a071a1fb97a4d3c8103a91114acc1140",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/622a2253a071a1fb97a4d3c8103a91114acc1140.tar.gz?rev=622a2253a071a1fb97a4d3c8103a91114acc1140"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/622a2253a071a1fb97a4d3c8103a91114acc1140.tar.gz"
       },
       "original": {
         "type": "tarball",
@@ -4565,11 +4565,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1728166987,
-        "narHash": "sha256-w6dVTguAn9zJ+7aPOhBQgDz8bn6YZ7b56cY8Kg5HJRI=",
+        "lastModified": 1730187742,
+        "narHash": "sha256-M0umGIIvVFqCwA0fQ5edivMTbRYA0r/5tXK8sr+M7EA=",
         "owner": "hyprwm",
         "repo": "xdg-desktop-portal-hyprland",
-        "rev": "fb9c8d665af0588bb087f97d0f673ddf0d501787",
+        "rev": "998f646762b94fbac61b0271ce66d3e617262858",
         "type": "github"
       },
       "original": {
