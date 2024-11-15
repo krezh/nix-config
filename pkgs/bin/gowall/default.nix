@@ -8,7 +8,7 @@
 buildGoModule rec {
   pname = "gowall";
   # renovate: datasource=github-releases depName=Achno/gowall
-  version = "0.1.8";
+  version = "0.1.9";
 
   src = fetchFromGitHub {
     owner = "Achno";
