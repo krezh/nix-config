@@ -8,11 +8,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1731937681,
-        "narHash": "sha256-L278yNw/I0Os9lrMfUDt6f9ZgOeOIwxjtCbxKMMFjIg=",
+        "lastModified": 1731944682,
+        "narHash": "sha256-iZSbCJceoV0mVCXUwiBk0xANDk5dekdxg6JSdEuHcr8=",
         "owner": "Aylur",
         "repo": "ags",
-        "rev": "bc46e2723440dd24c83417d01467cd639dca4fde",
+        "rev": "7dff0fe79d8649de24effcba6880715b935b1991",
         "type": "github"
       },
       "original": {
@@ -534,11 +534,11 @@
         "systems": "systems_7"
       },
       "locked": {
-        "lastModified": 1710146030,
-        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "lastModified": 1731533236,
+        "narHash": "sha256-l0KFg5HjrsfsO/JpG+r7fRrqm12kzFHyUHqHCVpMMbI=",
         "owner": "numtide",
         "repo": "flake-utils",
-        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "rev": "11707dc2f618dd54ca8739b309ec4fc024de578b",
         "type": "github"
       },
       "original": {
@@ -836,11 +836,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1731938554,
-        "narHash": "sha256-xigvc/6aMVkp6ny/KfvjfK3xSIy0qvT5HTHAZb803K8=",
+        "lastModified": 1731945258,
+        "narHash": "sha256-N7uJSSMqHzwH4uahb+Uw3sADVp3XdLfqkP2T144gnFk=",
         "ref": "refs/heads/main",
-        "rev": "6744bb57c639d5359a414eea2566328bb05c7065",
-        "revCount": 5472,
+        "rev": "df9ff4489973afa9e29bb94ac47c946db745b460",
+        "revCount": 5475,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -888,11 +888,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1731619734,
-        "narHash": "sha256-ZroMITOTQ3eu6z+3m7DJtaKePJWDTPuElkgmKl3rl9g=",
+        "lastModified": 1731941239,
+        "narHash": "sha256-+WF8+sbm4IBmq84FCJu31vv5yAJdEyXLPrDixFa9QIM=",
         "owner": "hyprwm",
         "repo": "hyprland-plugins",
-        "rev": "344a69db96fa8c6dc3b8f1f8f5a75f6eb441cbf2",
+        "rev": "95fee7d0a7fa48828f5e9da1af6dc1fd7adb360d",
         "type": "github"
       },
       "original": {
@@ -1346,15 +1346,15 @@
     "lix": {
       "flake": false,
       "locked": {
-        "lastModified": 1723503926,
-        "narHash": "sha256-Rosl9iA9MybF5Bud4BTAQ9adbY81aGmPfV8dDBGl34s=",
-        "rev": "bcaeb6388b8916ac6d1736e3aa2b13313e6a6bd2",
+        "lastModified": 1729298361,
+        "narHash": "sha256-hiGtfzxFkDc9TSYsb96Whg0vnqBVV7CUxyscZNhed0U=",
+        "rev": "ad9d06f7838a25beec425ff406fe68721fef73be",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/bcaeb6388b8916ac6d1736e3aa2b13313e6a6bd2.tar.gz?rev=bcaeb6388b8916ac6d1736e3aa2b13313e6a6bd2"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/lix/archive/ad9d06f7838a25beec425ff406fe68721fef73be.tar.gz?rev=ad9d06f7838a25beec425ff406fe68721fef73be"
       },
       "original": {
         "type": "tarball",
-        "url": "https://git.lix.systems/lix-project/lix/archive/2.91.0.tar.gz"
+        "url": "https://git.lix.systems/lix-project/lix/archive/2.91.1.tar.gz"
       }
     },
     "lix-module": {
@@ -1367,15 +1367,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1723510904,
-        "narHash": "sha256-zNW/rqNJwhq2lYmQf19wJerRuNimjhxHKmzrWWFJYts=",
-        "rev": "622a2253a071a1fb97a4d3c8103a91114acc1140",
+        "lastModified": 1729360442,
+        "narHash": "sha256-6U0CyPycIBc04hbYy2hBINnVso58n/ZyywY2BD3hu+s=",
+        "rev": "9098ac95768f7006d7e070b88bae76939f6034e6",
         "type": "tarball",
-        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/622a2253a071a1fb97a4d3c8103a91114acc1140.tar.gz"
+        "url": "https://git.lix.systems/api/v1/repos/lix-project/nixos-module/archive/9098ac95768f7006d7e070b88bae76939f6034e6.tar.gz?rev=9098ac95768f7006d7e070b88bae76939f6034e6"
       },
       "original": {
         "type": "tarball",
-        "url": "https://git.lix.systems/lix-project/nixos-module/archive/2.91.0.tar.gz"
+        "url": "https://git.lix.systems/lix-project/nixos-module/archive/2.91.1-1.tar.gz"
       }
     },
     "mk-naked-shell": {
@@ -1465,11 +1465,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1731933429,
-        "narHash": "sha256-+LbkbdbT6kAZb2cMTPy614KBe43lxqoNoyn+bKD3FBQ=",
+        "lastModified": 1731939910,
+        "narHash": "sha256-sx79w4tHyWnybaqSymMFEymPZO+gjQRgbEKs/GBhsVM=",
         "owner": "viperml",
         "repo": "nh",
-        "rev": "4198d6ac19b5d9e5db3e8c7cec8a5355fab9b6e9",
+        "rev": "b22e96f7cae9cfb7aa7f24eea6ec58fbde41545b",
         "type": "github"
       },
       "original": {
@@ -4365,11 +4365,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1731744255,
-        "narHash": "sha256-2hiuH6Pv/0eKAVe9yh/WR35Tj5Lshz7NXSQH9zE8o8g=",
+        "lastModified": 1731940729,
+        "narHash": "sha256-44FZUcR8TY0hA3ASLnRO5PKM4BdCjmSrYwGTwZyeFI4=",
         "owner": "abenz1267",
         "repo": "walker",
-        "rev": "ed9c14eaba5a9ff552ea924370f1441766da2122",
+        "rev": "ba69a44634dc1dfc44a2c5639c85809cde254dfc",
         "type": "github"
       },
       "original": {
