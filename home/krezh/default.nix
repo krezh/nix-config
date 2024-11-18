@@ -158,6 +158,7 @@ in
   nix = {
     settings = {
       accept-flake-config = true;
+      always-allow-substitutes = true;
       experimental-features = [
         "nix-command"
         "flakes"
