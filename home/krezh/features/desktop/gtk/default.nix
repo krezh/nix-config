@@ -11,7 +11,7 @@
     };
   };
 
-  catppuccin.pointerCursor.enable = true;
+  catppuccin.pointerCursor.enable = false; # FIXME: enable this when the package is not broken
   catppuccin.pointerCursor.flavor = "mocha";
   catppuccin.pointerCursor.accent = "light";
 
