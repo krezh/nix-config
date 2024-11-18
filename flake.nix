@@ -60,6 +60,7 @@
 
     nix-inspect.url = "github:bluskript/nix-inspect";
     nix-inspect.inputs.nixpkgs.follows = "nixpkgs";
+
     catppuccin.url = "github:catppuccin/nix";
 
     nix-index = {
@@ -96,9 +97,6 @@
       url = "github:hyprwm/hyprland-plugins";
       inputs.hyprland.follows = "hyprland";
     };
-
-    hyprsplit.url = "github:shezdy/hyprsplit";
-    hyprsplit.inputs.hyprland.follows = "hyprland";
 
     hyprfocus = {
       url = "github:pyt0xic/hyprfocus";
