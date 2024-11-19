@@ -7,7 +7,7 @@
 buildGoModule rec {
   pname = "up";
   # renovate: datasource=github-releases depName=jesusprubio/up
-  version = "1.1.0";
+  version = "1.2.1";
 
   src = fetchFromGitHub {
     owner = "jesusprubio";
