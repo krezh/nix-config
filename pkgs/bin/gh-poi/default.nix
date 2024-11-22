@@ -2,7 +2,7 @@
 buildGoModule rec {
   pname = "gh-poi";
   # renovate: datasource=github-releases depName=seachicken/gh-poi
-  version = "0.11.0";
+  version = "0.12.0";
 
   src = fetchFromGitHub {
     owner = "seachicken";
