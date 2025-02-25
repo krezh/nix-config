@@ -9,7 +9,7 @@
 buildGoModule rec {
   pname = "fluxcd";
   # renovate: datasource=github-releases depName=fluxcd/flux2
-  version = "2.5.0";
+  version = "2.5.1";
 
   src = fetchFromGitHub {
     owner = "fluxcd";
