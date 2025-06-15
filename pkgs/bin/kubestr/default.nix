@@ -7,7 +7,7 @@
 buildGoModule rec {
   pname = "kubestr";
   # renovate: datasource=github-releases depName=kastenhq/kubestr
-  version = "0.4.48";
+  version = "0.4.49";
 
   src = fetchFromGitHub {
     owner = "kastenhq";
