@@ -6,7 +6,7 @@
   lib,
   stdenv,
 }:
-buildGoModule rec {
+buildGo124Module rec {
   pname = "fluxcd";
   # renovate: datasource=github-releases depName=fluxcd/flux2
   version = "2.6.2";
