@@ -1,5 +1,5 @@
 {
-  buildGoModule,
+  buildGo124Module,
   fetchFromGitHub,
   fetchzip,
   installShellFiles,
