@@ -7,7 +7,7 @@
 buildGo124Module rec {
   pname = "talswitcher";
   # renovate: datasource=github-releases depName=mirceanton/talswitcher
-  version = "2.0.9";
+  version = "2.0.10";
 
   src = fetchFromGitHub {
     owner = "mirceanton";
