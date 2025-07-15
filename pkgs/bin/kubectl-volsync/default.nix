@@ -7,7 +7,7 @@
 buildGoModule rec {
   pname = "kubectl-volsync";
   # renovate: datasource=github-releases depName=backube/volsync
-  version = "0.12.1";
+  version = "0.13.0";
 
   src = fetchFromGitHub {
     owner = "backube";
