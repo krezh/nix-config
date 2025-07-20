@@ -42,7 +42,7 @@ jobs:
         name: Generate Nix Matrix
         run: |
           set -Eeu
-          matrix="$(nix eval --json '.#evalHosts' | jq -cM --argjson include_hosts "${{ env.INCLUDED_HOSTS }}"" '.include |= map(select(.host as $host | $include_hosts | index($host)))')"
+          matrix="$(nix eval --json '.#evalHosts' | jq -cM --argjson include_hosts "${{ env.INCLUDED_HOSTS }}" '.include |= map(select(.host as $host | $include_hosts | index($host)))')"
           echo "matrix=$matrix" >> "$GITHUB_OUTPUT"
 
       - name: show output
