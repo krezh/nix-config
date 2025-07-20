@@ -87,7 +87,7 @@ jobs:
             ".#nixosConfigurations.${{ matrix.host }}.config.system.build.isoImage" \
             --fallback \
             --log-format raw \
-             > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2)
+            > >(tee stdout.log) 2> >(tee /tmp/nix-build-err.log >&2)
 
       - name: Create tag
         id: tag
