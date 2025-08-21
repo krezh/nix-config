@@ -35,6 +35,18 @@ in
     accent = "lavender";
   };
 
+  catppuccin.cursors.enable = true;
+  catppuccin.cursors.flavor = "mocha";
+  catppuccin.cursors.accent = "light";
+  catppuccin.hyprland.enable = true;
+  catppuccin.gtk.icon.enable = true;
+  catppuccin.rofi.enable = true;
+  catppuccin.vesktop.enable = true;
+  catppuccin.vscode.profiles.default.enable = false;
+  catppuccin.k9s.enable = true;
+  catppuccin.k9s.flavor = "mocha";
+  catppuccin.k9s.transparent = true;
+
   sops = {
     age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
     defaultSopsFile = ./secrets.sops.yaml;
@@ -65,6 +77,7 @@ in
       GOPATH = "${config.xdg.dataHome}/go";
       CARGO_HOME = "${config.xdg.dataHome}/cargo";
       SOPS_AGE_KEY_FILE = "${config.sops.age.keyFile}";
+      SOPS_AGE_KEY_CMD = "age-plugin-yubikey --identity";
     };
     packages = with pkgs; [
       curl
@@ -103,8 +116,9 @@ in
       terraform
       minijinja
       gh-poi
-      xxd
       pre-commit
+      p7zip
+      unzip
 
       # Secrets
       age-plugin-yubikey

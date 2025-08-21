@@ -1,14 +1,12 @@
 { pkgs, ... }:
 {
   imports = [
-    #inputs.hyprland.homeManagerModules.default
     ./binds.nix
   ];
 
   wayland.windowManager.hyprland = {
     enable = true;
     xwayland.enable = true;
-    #package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     systemd = {
       enable = true;
       variables = [
@@ -23,5 +21,7 @@
     brightnessctl
     (flameshot.override { enableWlrSupport = true; })
     nwg-displays
+    grim
+    slurp
   ];
 }
