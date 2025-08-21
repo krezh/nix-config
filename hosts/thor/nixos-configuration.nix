@@ -143,12 +143,12 @@
       # rocm clr drivers
       opencl.enable = true;
 
-      initrd.enable = true;
+      # initrd.enable = true;
 
-      amdvlk = {
-        enable = true;
-        support32Bit.enable = true;
-      };
+      # amdvlk = {
+      #   enable = true;
+      #   support32Bit.enable = true;
+      # };
     };
   };
 
@@ -161,6 +161,7 @@
       WLR_BACKEND = "vulkan";
       PROTON_FSR4_UPGRADE = 1;
       AMD_VULKAN_ICD = "RADV";
+      MESA_SHADER_CACHE_MAX_SIZE = "50G";
     };
     systemPackages = with pkgs.unstable; [
       amdgpu_top
