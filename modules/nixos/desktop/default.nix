@@ -5,5 +5,6 @@
     ./openssh
     ./fonts
     ./steam
+    ./openrgb
   ];
 }

@@ -49,6 +49,7 @@ in
         nerd-fonts.ubuntu
         nerd-fonts.ubuntu-mono
         nerd-fonts.ubuntu-sans
+        nerd-fonts.jetbrains-mono
       ];
     };
   };

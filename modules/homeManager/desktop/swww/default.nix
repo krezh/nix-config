@@ -59,7 +59,7 @@ in
           "SWWW_TRANSITION_FPS"
           "SWWW_TRANSITION_BEZIER"
         ];
-        ExecStart = "${swww}/bin/swww-daemon";
+        ExecStart = "${swww}/bin/swww-daemon -q";
         Restart = "on-failure";
       };
       Install.WantedBy = [

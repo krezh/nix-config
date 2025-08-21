@@ -2,6 +2,7 @@
 {
   hmModules.desktop.vesktop = {
     enable = true;
+    arrpc.enable = true;
     settings = {
       minimizeToTray = true;
       discordBranch = "stable";
@@ -58,7 +59,7 @@
           enabled = false;
         };
         BetterGifPicker = {
-          enabled = true;
+          enabled = false;
         };
         BetterNotesBox = {
           enabled = false;
@@ -588,7 +589,7 @@
           enabled = true;
         };
         "WebRichPresence (arRPC)" = {
-          enabled = false;
+          enabled = true;
         };
         WebScreenShareFixes = {
           enabled = true;
@@ -613,7 +614,8 @@
         };
       };
       themeLinks = [
-        "https://capnkitten.github.io/BetterDiscord/Themes/Material-Discord/css/source.css"
+        #"https://capnkitten.github.io/BetterDiscord/Themes/Material-Discord/css/source.css"
+        "https://catppuccin.github.io/discord/dist/catppuccin-mocha-lavender.theme.css"
       ];
       transparent = false;
       useQuickCss = true;

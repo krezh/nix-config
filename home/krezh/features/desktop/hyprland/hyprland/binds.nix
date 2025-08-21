@@ -6,8 +6,13 @@
   ...
 }:
 let
-  ghostty = inputs.ghostty.packages.${pkgs.system}.ghostty;
-  defaultTerminal = lib.getExe ghostty;
+
+  kitty = {
+    pkg = pkgs.kitty;
+    bin = lib.getExe kitty.pkg;
+  };
+
+  defaultTerminal = kitty.bin;
 
   hyprlock = {
     pkg = config.programs.hyprlock.package;
@@ -51,6 +56,9 @@ in
       windowrulev2 = [
         "float,class:(clipse)"
         "size 622 652,class:(clipse)"
+        "stayfocused, class:(clipse)"
+        "stayfocused, class:(Rofi)"
+        "workspace 2 silent, class:^(vesktop)$"
       ];
 
       bind = [
@@ -59,10 +67,10 @@ in
         "${mainMod},R,exec,${rofi.bin} -show drun"
         # Applications
         "${mainMod},B,exec,${vivaldi.bin}"
-        "${mainMod},E,exec,${lib.getExe pkgs.nemo}"
+        "${mainMod},E,exec,${lib.getExe pkgs.nautilus}"
         "${mainMod},RETURN,exec,${defaultTerminal}"
         "${mainModShift},RETURN,exec,[floating] ${defaultTerminal}"
-        "${mainMod},O,exec,${lib.getExe pkgs.obsidian}"
+        "${mainMod},O,exec,${lib.getExe pkgs.gnome-calculator}"
         "CTRL SHIFT,ESCAPE,exec,${lib.getExe pkgs.resources}"
         "${mainMod},C,exec,${defaultTerminal} --class clipse ${lib.getExe config.hmModules.desktop.clipse.package}"
 

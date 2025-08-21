@@ -23,15 +23,34 @@
     "sd_mod"
   ];
 
-  boot.initrd.kernelModules = [ "amdgpu"];
+  boot.initrd.kernelModules = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "amdgpu" ];
   boot.kernelParams = [
-    "ipv6.disable=1" 
+    "ipv6.disable=1"
     "amdgpu.ppfeaturemask=0xfffd3fff"
     "split_lock_detect=off"
-    ];
-  boot.kernelModules = [
-    "amdgpu"
   ];
+  boot.kernelModules = [ ];
+
+  services.udev.extraRules = ''
+    # Wooting One Legacy
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="ff01", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="ff01", TAG+="uaccess"
+
+    # Wooting One update mode
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="2402", TAG+="uaccess"
+
+    # Wooting Two Legacy
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="ff02", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="ff02", TAG+="uaccess"
+
+    # Wooting Two update mode
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="03eb", ATTRS{idProduct}=="2403", TAG+="uaccess"
+
+    # Generic Wooting devices
+    SUBSYSTEM=="hidraw", ATTRS{idVendor}=="31e3", TAG+="uaccess"
+    SUBSYSTEM=="usb", ATTRS{idVendor}=="31e3", TAG+="uaccess"
+  '';
 
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 }

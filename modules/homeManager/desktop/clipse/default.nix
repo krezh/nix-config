@@ -48,7 +48,7 @@ in
     enable = lib.mkEnableOption "clipse";
 
     package = lib.mkOption {
-      type = pkgs.lib.types.package;
+      type = lib.types.package;
       default = pkgs.clipse;
     };
 

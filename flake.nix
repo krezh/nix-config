@@ -19,7 +19,7 @@
   };
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     lix-module = {
@@ -28,7 +28,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -37,6 +37,8 @@
     };
 
     hardware.url = "github:nixos/nixos-hardware";
+
+    chaotic.url = "github:chaotic-cx/nyx/nyxpkgs-unstable";
 
     nixos-facter-modules.url = "github:numtide/nixos-facter-modules";
 
@@ -71,6 +73,7 @@
     };
 
     catppuccin.url = "github:catppuccin/nix";
+    catppuccin.inputs.nixpkgs.follows = "nixpkgs";
 
     nix-index = {
       url = "github:nix-community/nix-index-database";
@@ -114,11 +117,6 @@
 
     nixos-wsl = {
       url = "github:nix-community/nixos-wsl/release-25.05";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    ghostty = {
-      url = "github:ghostty-org/ghostty";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
