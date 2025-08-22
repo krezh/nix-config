@@ -54,7 +54,9 @@ in
 
     systemd.user.services.vesktop = {
       Install = {
-        WantedBy = [ "graphical-session.target" ];
+        WantedBy = [
+          (lib.mkIf config.wayland.windowManager.hyprland.systemd.enable "hyprland-session.target")
+        ];
       };
       Unit = {
         Description = "A Custom Discord Client";

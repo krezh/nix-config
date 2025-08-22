@@ -18,12 +18,6 @@
     plymouth = {
       enable = true;
     };
-    initrd.verbose = false;
-    consoleLogLevel = 0;
-    kernelParams = [
-      "quiet"
-      "udev.log_level=0"
-    ];
     kernelPackages = pkgs.linuxPackages_cachyos;
     loader = {
       timeout = 1;
@@ -59,13 +53,17 @@
   };
 
   security.pam.services.krezh.enableGnomeKeyring = true;
-  security.pam.services.gdm.enableGnomeKeyring = true;
-  security.pam.services.hyprlock = { };
+  security.pam.services.gdm-password.enableGnomeKeyring = true;
+  security.pam.services.hyprlock.enableGnomeKeyring = true;
   programs.seahorse.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  services.dbus.packages = [
-    pkgs.gnome-keyring
-    pkgs.gcr
+  services.dbus.packages = with pkgs; [
+    gnome-keyring
+    gcr
+    seahorse
+    libsecret
+    libgnome-keyring
+    libnotify
   ];
 
   nixosModules.desktop = {
@@ -89,8 +87,6 @@
       };
       defaultSession = "hyprland";
     };
-
-    xserver.enable = false;
 
     fstrim.enable = true;
 
@@ -123,15 +119,22 @@
 
   programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
 
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ ];
-    allowedUDPPorts = [ ];
-  };
+  networking.firewall =
+    let
+      kde-connect = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ];
+    in
+    {
+      allowedTCPPortRanges = kde-connect;
+      allowedUDPPortRanges = kde-connect;
+    };
 
   programs.hyprland = {
     enable = true;
-    withUWSM = false;
   };
 
   hardware = {
@@ -142,13 +145,6 @@
     amdgpu = {
       # rocm clr drivers
       opencl.enable = true;
-
-      # initrd.enable = true;
-
-      # amdvlk = {
-      #   enable = true;
-      #   support32Bit.enable = true;
-      # };
     };
   };
 
@@ -162,8 +158,9 @@
       PROTON_FSR4_UPGRADE = 1;
       AMD_VULKAN_ICD = "RADV";
       MESA_SHADER_CACHE_MAX_SIZE = "50G";
+      __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = 1;
     };
-    systemPackages = with pkgs.unstable; [
+    systemPackages = with pkgs; [
       amdgpu_top
       age-plugin-yubikey
       headsetcontrol
@@ -181,6 +178,9 @@
       winetricks
       protontricks
       vulkan-tools
+      # Audio
+      pwvucontrol
+      better-control
     ];
   };
   networking.hostName = "${hostname}";
