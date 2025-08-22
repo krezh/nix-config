@@ -59,6 +59,9 @@ in
       "atuin/key" = {
         path = "${config.xdg.configHome}/atuin/key";
       };
+      "zipline/token" = {
+        path = "${config.xdg.configHome}/flameshot/zipline-token";
+      };
     };
   };
 

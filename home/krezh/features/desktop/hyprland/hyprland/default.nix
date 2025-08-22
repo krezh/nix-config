@@ -19,7 +19,6 @@
 
   home.packages = with pkgs; [
     brightnessctl
-    (flameshot.override { enableWlrSupport = true; })
     nwg-displays
     grim
     slurp

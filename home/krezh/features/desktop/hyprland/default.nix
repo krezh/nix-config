@@ -9,5 +9,6 @@
     ./clipse
     ./shikane
     ./wlogout
+    ./flameshot
   ];
 }
