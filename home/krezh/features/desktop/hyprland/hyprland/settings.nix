@@ -23,6 +23,7 @@
     mouse_move_enables_dpms = true;
     key_press_enables_dpms = true;
     animate_manual_resizes = false;
+    middle_click_paste = false;
   };
 
   gestures = {
@@ -39,9 +40,6 @@
       natural_scroll = false;
     };
     sensitivity = "0.4"; # -1.0 - 1.0, 0 means no modification.
-    # enabling scroll button
-    scroll_method = "on_button_down";
-    scroll_button = 274; # the value reported by wev
   };
 
   plugins = { };

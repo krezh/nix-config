@@ -117,7 +117,10 @@
 
   networking.networkmanager.enable = true;
 
-  programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
+  # xdg.portal.extraPortals = lib.mkForce [
+  #   pkgs.xdg-desktop-portal-hyprland
+  #   pkgs.gnome-keyring
+  # ];
 
   networking.firewall =
     let
@@ -170,6 +173,8 @@
       lact
       wootility
       nautilus
+      lsfg-vk
+      lsfg-vk-ui
       # Steam
       mangohud
       gamemode
