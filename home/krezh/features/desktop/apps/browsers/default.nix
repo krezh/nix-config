@@ -8,14 +8,16 @@
 {
   home = {
     sessionVariables = {
-      DEFAULT_BROWSER = lib.getExe config.programs.vivaldi.package;
+      DEFAULT_BROWSER = lib.getExe config.programs.chromium.package;
     };
   };
 
   programs = {
-    vivaldi = {
-      enable = true;
-    };
+    chromium.enable = true;
+    chromium.package = pkgs.vivaldi;
+    chromium.commandLineArgs = [
+      "--enable-blink-features=MiddleClickAutoscroll"
+    ];
   };
 
   home.packages = [ inputs.zen-browser.packages.${pkgs.system}.default ];

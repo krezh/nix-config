@@ -26,7 +26,7 @@ let
 
   vivaldi = {
     pkg = config.programs.vivaldi.package;
-    bin = lib.getExe config.programs.vivaldi.package;
+    bin = lib.getExe vivaldi.pkg;
   };
 
   volume_script =
@@ -48,7 +48,7 @@ let
 
   flameshot = "${lib.getExe pkgs.zipline-flameshot} -t ${
     config.sops.secrets."zipline/token".path
-  } -u https://zipline.plexuz.xyz -p ~/Pictures/Screenshots";
+  } -u https://zipline.talos.plexuz.xyz -p ~/Pictures/Screenshots";
 
   mainMod = "SUPER";
   mainModShift = "${mainMod} SHIFT";

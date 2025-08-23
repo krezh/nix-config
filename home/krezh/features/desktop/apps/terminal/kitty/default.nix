@@ -7,7 +7,9 @@
     settings = {
       cursor_trail = 1;
       cursor_shape = "block";
-      font_size = 11;
+      shell_integration = "no-cursor";
+      input_delay = 2;
+      font_size = 12;
       font_family = "family=\"CaskaydiaCove Nerd Font\"";
       bold_font = "auto";
       italic_font = "auto";
