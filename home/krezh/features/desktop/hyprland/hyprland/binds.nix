@@ -6,8 +6,13 @@
   ...
 }:
 let
-  ghostty = inputs.ghostty.packages.${pkgs.system}.ghostty;
-  defaultTerminal = lib.getExe ghostty;
+
+  kitty = {
+    pkg = pkgs.kitty;
+    bin = lib.getExe kitty.pkg;
+  };
+
+  defaultTerminal = kitty.bin;
 
   hyprlock = {
     pkg = config.programs.hyprlock.package;
@@ -21,7 +26,7 @@ let
 
   vivaldi = {
     pkg = config.programs.vivaldi.package;
-    bin = lib.getExe config.programs.vivaldi.package;
+    bin = lib.getExe vivaldi.pkg;
   };
 
   volume_script =
@@ -41,6 +46,10 @@ let
     bin = lib.getExe grimblast.pkg;
   };
 
+  flameshot = "${lib.getExe pkgs.zipline-flameshot} -t ${
+    config.sops.secrets."zipline/token".path
+  } -u https://zipline.talos.plexuz.xyz -p ~/Pictures/Screenshots";
+
   mainMod = "SUPER";
   mainModShift = "${mainMod} SHIFT";
 
@@ -51,6 +60,15 @@ in
       windowrulev2 = [
         "float,class:(clipse)"
         "size 622 652,class:(clipse)"
+        "stayfocused, class:(clipse)"
+        "stayfocused, class:(Rofi)"
+        "workspace 2 silent, class:^(legcord)$"
+        "workspace 3, class:^(steam_app_[0-9]+)$"
+        # flameshot multi-display fix
+        "move 0 0,class:(flameshot),title:(flameshot)"
+        "pin,class:(flameshot),title:(flameshot)"
+        "fullscreenstate,class:(flameshot),title:(flameshot)"
+        "float,class:(flameshot),title:(flameshot)"
       ];
 
       bind = [
@@ -59,16 +77,19 @@ in
         "${mainMod},R,exec,${rofi.bin} -show drun"
         # Applications
         "${mainMod},B,exec,${vivaldi.bin}"
-        "${mainMod},E,exec,${lib.getExe pkgs.nemo}"
+        "${mainMod},E,exec,${lib.getExe pkgs.nautilus}"
         "${mainMod},RETURN,exec,${defaultTerminal}"
-        "${mainModShift},RETURN,exec,[floating] ${defaultTerminal}"
-        "${mainMod},O,exec,${lib.getExe pkgs.obsidian}"
+        "${mainModShift},RETURN,exec,[float] ${defaultTerminal}"
+        "${mainMod},O,exec,${lib.getExe pkgs.gnome-calculator}"
         "CTRL SHIFT,ESCAPE,exec,${lib.getExe pkgs.resources}"
         "${mainMod},C,exec,${defaultTerminal} --class clipse ${lib.getExe config.hmModules.desktop.clipse.package}"
 
         # Printscreen
         "ALT,P,exec,${grimblast.bin} --notify copy"
-        "ALT SHIFT,P,exec,${grimblast.bin} --notify --freeze copy area || notify-send 'Grimblast'"
+        "${mainModShift},P,exec,${grimblast.bin} --notify --freeze copy area || notify-send 'Grimblast'"
+        "${mainModShift},S,exec,${flameshot} -m gui"
+        ",PRINT,exec,${flameshot} -m full"
+        "ALT,PRINT,exec,${flameshot} -m screen"
 
         # Audio
         ",XF86AudioMute,exec,${volume_script} mute"
@@ -104,8 +125,8 @@ in
         "${mainMod},0,workspace,10"
 
         # Scratchpad
-        "${mainMod},S,togglespecialworkspace"
-        "${mainModShift},S,movetoworkspace,special"
+        "${mainMod},W,togglespecialworkspace"
+        "${mainModShift},W,movetoworkspace,special"
 
         # Move active window to a workspace with mainMod + SHIFT + [0-9]
         "${mainModShift},1,movetoworkspace,1"

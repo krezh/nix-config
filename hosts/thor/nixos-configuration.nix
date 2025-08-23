@@ -1,28 +1,28 @@
 {
   pkgs,
   lib,
+  inputs,
   hostname,
   ...
 }:
 {
-  imports =
-    (lib.scanPath.toList { path = ../common/users; })
-    ++ (lib.scanPath.toList { path = ../common/global; });
+  imports = [
+    inputs.chaotic.nixosModules.nyx-cache
+    inputs.chaotic.nixosModules.nyx-overlay
+    inputs.chaotic.nixosModules.nyx-registry
+  ]
+  ++ (lib.scanPath.toList { path = ../common/users; })
+  ++ (lib.scanPath.toList { path = ../common/global; });
 
   boot = {
     plymouth = {
       enable = true;
     };
-    initrd.verbose = false;
-    consoleLogLevel = 0;
-    kernelParams = [
-      "quiet"
-      "udev.log_level=0"
-    ];
-    kernelPackages = pkgs.linuxPackages_zen;
+    kernelPackages = pkgs.linuxPackages_cachyos;
     loader = {
+      timeout = 1;
       systemd-boot = {
-        enable = true;
+        enable = false;
         configurationLimit = 5;
       };
       efi = {
@@ -30,7 +30,7 @@
         efiSysMountPoint = "/boot";
       };
       grub = {
-        enable = false;
+        enable = true;
         device = "nodev";
         efiSupport = true;
         useOSProber = true;
@@ -39,38 +39,51 @@
     };
   };
 
-  security.pam.services.krezh.enableGnomeKeyring = true;
-  programs.seahorse.enable = true;
-  services.gnome.gnome-keyring.enable = true;
-  services.dbus.packages = [ pkgs.gnome-keyring pkgs.gcr ];
+  services.scx.enable = true; # by default uses scx_rustland scheduler
 
-  programs.steam = {
-    enable = true;
-    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
-    gamescopeSession.enable = true;
+  xdg.mime.enable = true;
+  xdg.mime = {
+    addedAssociations = {
+      # This shouldn't be necessary, but just for good measure...
+      "inode/directory" = "org.gnome.Nautilus.desktop";
+    };
+    defaultApplications = {
+      "inode/directory" = "org.gnome.Nautilus.desktop";
+    };
   };
 
-  programs.gamemode.enable = true;
+  security.pam.services.krezh.enableGnomeKeyring = true;
+  security.pam.services.gdm-password.enableGnomeKeyring = true;
+  security.pam.services.hyprlock.enableGnomeKeyring = true;
+  programs.seahorse.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  services.dbus.packages = with pkgs; [
+    gnome-keyring
+    gcr
+    seahorse
+    libsecret
+    libgnome-keyring
+    libnotify
+  ];
 
   nixosModules.desktop = {
     openssh.enable = true;
     fonts.enable = true;
+    steam.enable = true;
+    openrgb.enable = false;
   };
-
-  security.pam.services.hyprlock = { };
-
-  catppuccin.plymouth.enable = true;
-  catppuccin.sddm.enable = true;
 
   services = {
     displayManager = {
       sddm = {
-        enable = true;
+        enable = false;
         wayland.enable = true;
         autoNumlock = true;
         package = pkgs.kdePackages.sddm;
+      };
+      gdm = {
+        enable = true;
+        wayland = true;
       };
       defaultSession = "hyprland";
     };
@@ -104,13 +117,24 @@
 
   networking.networkmanager.enable = true;
 
-  programs.gdk-pixbuf.modulePackages = [ pkgs.librsvg ];
+  # xdg.portal.extraPortals = lib.mkForce [
+  #   pkgs.xdg-desktop-portal-hyprland
+  #   pkgs.gnome-keyring
+  # ];
 
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ ];
-    allowedUDPPorts = [ ];
-  };
+  networking.firewall =
+    let
+      kde-connect = [
+        {
+          from = 1714;
+          to = 1764;
+        }
+      ];
+    in
+    {
+      allowedTCPPortRanges = kde-connect;
+      allowedUDPPortRanges = kde-connect;
+    };
 
   programs.hyprland = {
     enable = true;
@@ -119,17 +143,15 @@
   hardware = {
     graphics = {
       enable = true;
+      enable32Bit = true;
+    };
+    amdgpu = {
+      # rocm clr drivers
+      opencl.enable = true;
     };
   };
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
-
   security.rtkit.enable = true;
-
-  programs.nix-ld = {
-    enable = true;
-    package = pkgs.nix-ld-rs;
-  };
 
   environment = {
     sessionVariables = {
@@ -137,9 +159,11 @@
       STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
       WLR_BACKEND = "vulkan";
       PROTON_FSR4_UPGRADE = 1;
+      AMD_VULKAN_ICD = "RADV";
+      MESA_SHADER_CACHE_MAX_SIZE = "50G";
+      __GL_SHADER_DISK_CACHE_SKIP_CLEANUP = 1;
     };
-    systemPackages = with pkgs.unstable; [
-      mesa
+    systemPackages = with pkgs; [
       amdgpu_top
       age-plugin-yubikey
       headsetcontrol
@@ -147,6 +171,10 @@
       protonup
       heroic
       lact
+      wootility
+      nautilus
+      lsfg-vk
+      lsfg-vk-ui
       # Steam
       mangohud
       gamemode
@@ -155,15 +183,9 @@
       winetricks
       protontricks
       vulkan-tools
-      # Extra dependencies
-      # https://github.com/lutris/docs/
-      gnutls
-      libgpg-error
-      freetype
-      sqlite
-      libxml2
-      xml2
-      SDL2
+      # Audio
+      pwvucontrol
+      better-control
     ];
   };
   networking.hostName = "${hostname}";

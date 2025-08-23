@@ -1,4 +1,3 @@
-{pkgs,...}:
 {
   imports = [
     ./hyprland
@@ -9,5 +8,7 @@
     ./hyprlock
     ./clipse
     ./shikane
+    ./wlogout
+    ./flameshot
   ];
 }

@@ -1,5 +1,5 @@
 {
   imports = [
-    ./mailspring
+    ./wooting.nix
   ];
 }
