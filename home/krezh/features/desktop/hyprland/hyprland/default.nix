@@ -9,6 +9,7 @@
     xwayland.enable = true;
     systemd = {
       enable = true;
+      enableXdgAutostart = true;
       variables = [
         "--all"
       ]; # https://wiki.hyprland.org/Nix/Hyprland-on-Home-Manager/#programs-dont-work-in-systemd-services-but-do-on-the-terminal
@@ -19,8 +20,10 @@
 
   home.packages = with pkgs; [
     brightnessctl
-    nwg-displays
+    #nwg-displays
     grim
     slurp
+    wl-screenrec
+    hyprpicker
   ];
 }

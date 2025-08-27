@@ -4,12 +4,14 @@
   ...
 }:
 writeShellApplication {
-  name = "zipline-wl-screenrec";
+  name = "zipline-recshot";
 
   runtimeInputs = with pkgs; [
     curl
     jq
     wl-clipboard
+    grim
+    slurp
     wl-screenrec
   ];
 

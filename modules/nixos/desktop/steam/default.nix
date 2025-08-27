@@ -14,6 +14,33 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.gamemode.enable = true;
+    programs.gamemode.enableRenice = true;
+    programs.gamemode.settings = {
+      custom = {
+        start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
+        end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+      };
+    };
+    environment = {
+      systemPackages = with pkgs; [
+        wine
+        winetricks
+        protontricks
+        vulkan-tools
+        sgdboop
+        mangohud
+        gamemode
+        lsfg-vk
+        lsfg-vk-ui
+        lutris
+        protonup
+        heroic
+        lact
+      ];
+      sessionVariables = {
+        STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
+      };
+    };
     programs = {
       gamescope = {
         enable = true;
@@ -28,10 +55,9 @@ in
       };
     };
     systemd.user.services.steam = {
-      enable = true;
+      enable = false;
       description = "Steam (no-GUI background startup)";
-      #after = [ "graphical-session.target" ]; # wait for networking
-      wantedBy = [ "graphical-session.target" ]; # run when your session starts
+      wantedBy = [ "graphical-session.target" ];
       serviceConfig = {
         ExecStart = "${lib.getExe pkgs.steam} -nochatui -nofriendsui -silent %U";
         Restart = "on-failure";

@@ -20,8 +20,8 @@
       sync_to_monitor = "yes";
       scrollback_lines = 10000;
       extraConfig = ''
-        mouse_map right press grabbed,ungrabbed no-op
-        mouse_map right click grabbed,ungrabbed paste_from_clipboard
+        mouse_map right click grabbed,ungrabbed no-op
+        mouse_map right press grabbed,ungrabbed paste_from_clipboard
       '';
     };
   };

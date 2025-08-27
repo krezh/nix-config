@@ -1,5 +1,4 @@
 {
-  inputs,
   pkgs,
   config,
   lib,
@@ -24,11 +23,6 @@ let
     bin = lib.getExe rofi.pkg;
   };
 
-  vivaldi = {
-    pkg = config.programs.vivaldi.package;
-    bin = lib.getExe vivaldi.pkg;
-  };
-
   volume_script =
     if config.hmModules.desktop.hyprpanel.enable then
       lib.getExe pkgs.volume_script_hyprpanel
@@ -41,12 +35,7 @@ let
     else
       lib.getExe pkgs.brightness_script;
 
-  grimblast = {
-    pkg = inputs.hyprland-contrib.packages.${pkgs.system}.grimblast;
-    bin = lib.getExe grimblast.pkg;
-  };
-
-  flameshot = "${lib.getExe pkgs.zipline-flameshot} -t ${
+  recShot = "${lib.getExe pkgs.zipline-recshot} -t ${
     config.sops.secrets."zipline/token".path
   } -u https://zipline.talos.plexuz.xyz -p ~/Pictures/Screenshots";
 
@@ -62,13 +51,8 @@ in
         "size 622 652,class:(clipse)"
         "stayfocused, class:(clipse)"
         "stayfocused, class:(Rofi)"
-        "workspace 2 silent, class:^(legcord)$"
+        "workspace 4 silent, class:^(legcord)$"
         "workspace 3, class:^(steam_app_[0-9]+)$"
-        # flameshot multi-display fix
-        "move 0 0,class:(flameshot),title:(flameshot)"
-        "pin,class:(flameshot),title:(flameshot)"
-        "fullscreenstate,class:(flameshot),title:(flameshot)"
-        "float,class:(flameshot),title:(flameshot)"
       ];
 
       bind = [
@@ -76,7 +60,7 @@ in
         "${mainMod},L,exec,${hyprlock.bin} --immediate"
         "${mainMod},R,exec,${rofi.bin} -show drun"
         # Applications
-        "${mainMod},B,exec,${vivaldi.bin}"
+        "${mainMod},B,exec,${config.home.sessionVariables.DEFAULT_BROWSER}"
         "${mainMod},E,exec,${lib.getExe pkgs.nautilus}"
         "${mainMod},RETURN,exec,${defaultTerminal}"
         "${mainModShift},RETURN,exec,[float] ${defaultTerminal}"
@@ -85,11 +69,11 @@ in
         "${mainMod},C,exec,${defaultTerminal} --class clipse ${lib.getExe config.hmModules.desktop.clipse.package}"
 
         # Printscreen
-        "ALT,P,exec,${grimblast.bin} --notify copy"
-        "${mainModShift},P,exec,${grimblast.bin} --notify --freeze copy area || notify-send 'Grimblast'"
-        "${mainModShift},S,exec,${flameshot} -m gui"
-        ",PRINT,exec,${flameshot} -m full"
-        "ALT,PRINT,exec,${flameshot} -m screen"
+        "${mainModShift},S,exec,${recShot} -m image-area"
+        ",PRINT,exec,${recShot} -m image-full"
+        "ALT,PRINT,exec,${recShot} -m image-window"
+        "SHIFT ALT,S,exec,${recShot} -m video-area"
+        "SHIFT,PRINT,exec,${recShot} -m video-window"
 
         # Audio
         ",XF86AudioMute,exec,${volume_script} mute"

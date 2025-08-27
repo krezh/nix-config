@@ -1,6 +1,8 @@
 { pkgs, ... }:
 {
+  imports = [ ];
+
   home.packages = [
-    pkgs.legcord
+    pkgs.walker
   ];
 }

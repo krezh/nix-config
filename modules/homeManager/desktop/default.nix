@@ -6,5 +6,7 @@
     ./upower-notify
     ./clipse
     ./shikane
+    ./thunderbird
+    ./discord
   ];
 }

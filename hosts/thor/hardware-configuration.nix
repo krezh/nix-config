@@ -10,6 +10,9 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     ./udev-rules
   ];
+  console = {
+    earlySetup = false;
+  };
 
   services.xserver.videoDrivers = [ "amdgpu" ];
   boot = {
@@ -32,7 +35,11 @@
       "amdgpu.ppfeaturemask=0xfffd3fff"
       "split_lock_detect=off"
       "quiet"
-      "udev.log_level=0"
+      "loglevel=3"
+      "systemd.show_status=auto"
+      "udev.log_level=3"
+      "rd.udev.log_level=3"
+      "vt.global_cursor_default=0"
     ];
   };
 

@@ -1,14 +1,17 @@
 {
-  config,
   lib,
   inputs,
   pkgs,
   ...
 }:
+let
+  zen = inputs.zen-browser.packages.${pkgs.system}.default;
+in
 {
   home = {
     sessionVariables = {
-      DEFAULT_BROWSER = lib.getExe config.programs.chromium.package;
+      #DEFAULT_BROWSER = lib.getExe config.programs.chromium.package;
+      DEFAULT_BROWSER = lib.getExe zen;
     };
   };
 
@@ -20,5 +23,5 @@
     ];
   };
 
-  home.packages = [ inputs.zen-browser.packages.${pkgs.system}.default ];
+  home.packages = [ zen ];
 }

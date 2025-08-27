@@ -9,6 +9,7 @@
     nix-init
     nix-update
     inputs.nixd.packages.${pkgs.system}.nixd
+    nil
     nix-inspect
     # Thumbnails
     ffmpeg-headless

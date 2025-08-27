@@ -39,7 +39,7 @@
     };
   };
 
-  services.scx.enable = true; # by default uses scx_rustland scheduler
+  services.scx.enable = true;
 
   xdg.mime.enable = true;
   xdg.mime = {
@@ -54,7 +54,9 @@
 
   security.pam.services.krezh.enableGnomeKeyring = true;
   security.pam.services.gdm-password.enableGnomeKeyring = true;
+  security.pam.services.gdm.enableGnomeKeyring = true;
   security.pam.services.hyprlock.enableGnomeKeyring = true;
+  security.rtkit.enable = true;
   programs.seahorse.enable = true;
   services.gnome.gnome-keyring.enable = true;
   services.dbus.packages = with pkgs; [
@@ -63,7 +65,6 @@
     seahorse
     libsecret
     libgnome-keyring
-    libnotify
   ];
 
   nixosModules.desktop = {
@@ -111,16 +112,20 @@
       wireplumber.enable = true;
       audio.enable = true;
     };
+    udisks2.enable = true;
+    devmon.enable = true;
+    gvfs.enable = true;
+  };
+
+  programs.nix-ld.enable = true;
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
   };
 
   services.udev.packages = [ pkgs.headsetcontrol ];
 
   networking.networkmanager.enable = true;
-
-  # xdg.portal.extraPortals = lib.mkForce [
-  #   pkgs.xdg-desktop-portal-hyprland
-  #   pkgs.gnome-keyring
-  # ];
 
   networking.firewall =
     let
@@ -146,17 +151,13 @@
       enable32Bit = true;
     };
     amdgpu = {
-      # rocm clr drivers
       opencl.enable = true;
     };
   };
 
-  security.rtkit.enable = true;
-
   environment = {
     sessionVariables = {
       NIXOS_OZONE_WL = 1;
-      STEAM_EXTRA_COMPAT_TOOLS_PATHS = "$HOME/.steam/root/compatibilitytools.d";
       WLR_BACKEND = "vulkan";
       PROTON_FSR4_UPGRADE = 1;
       AMD_VULKAN_ICD = "RADV";
@@ -167,22 +168,9 @@
       amdgpu_top
       age-plugin-yubikey
       headsetcontrol
-      lutris
-      protonup
-      heroic
-      lact
       wootility
       nautilus
-      lsfg-vk
-      lsfg-vk-ui
-      # Steam
-      mangohud
-      gamemode
-      # WINE
-      wine
-      winetricks
-      protontricks
-      vulkan-tools
+      libnotify
       # Audio
       pwvucontrol
       better-control

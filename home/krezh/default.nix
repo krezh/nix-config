@@ -122,6 +122,7 @@ in
       pre-commit
       p7zip
       unzip
+      shellcheck
 
       # Secrets
       age-plugin-yubikey

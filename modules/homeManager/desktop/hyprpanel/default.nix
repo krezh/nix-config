@@ -42,7 +42,7 @@ in
           "PATH"
           "XDG_RUNTIME_DIR"
         ];
-        ExecStart = "${cfg.package}/bin/hyprpanel";
+        ExecStart = "${lib.getExe cfg.package}";
         Restart = "always";
       };
       Install.WantedBy = [
