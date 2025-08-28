@@ -6,5 +6,6 @@
     ./fonts
     ./steam
     ./openrgb
+    ./bluetooth
   ];
 }

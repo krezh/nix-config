@@ -14,7 +14,7 @@
     earlySetup = false;
   };
 
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = [ "modesetting" ];
   boot = {
     initrd = {
       verbose = false;
@@ -29,10 +29,9 @@
       ];
     };
     consoleLogLevel = 0;
-    kernelModules = [ "amdgpu" ];
+    #kernelModules = [ "amdgpu" ];
     kernelParams = [
       "ipv6.disable=1"
-      "amdgpu.ppfeaturemask=0xfffd3fff"
       "split_lock_detect=off"
       "quiet"
       "loglevel=3"

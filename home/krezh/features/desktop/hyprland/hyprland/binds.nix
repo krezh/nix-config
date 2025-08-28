@@ -24,13 +24,13 @@ let
   };
 
   volume_script =
-    if config.hmModules.desktop.hyprpanel.enable then
+    if config.programs.hyprpanel.enable then
       lib.getExe pkgs.volume_script_hyprpanel
     else
       lib.getExe pkgs.volume_script;
 
   brightness_script =
-    if config.hmModules.desktop.hyprpanel.enable then
+    if config.programs.hyprpanel.enable then
       lib.getExe pkgs.brightness_script_hyprpanel
     else
       lib.getExe pkgs.brightness_script;
@@ -74,9 +74,6 @@ in
         "ALT,PRINT,exec,${recShot} -m image-window"
         "SHIFT ALT,S,exec,${recShot} -m video-area"
         "SHIFT,PRINT,exec,${recShot} -m video-window"
-
-        # Audio
-        ",XF86AudioMute,exec,${volume_script} mute"
 
         # Hyprland binds
         "${mainMod},Q,killactive"
@@ -129,7 +126,16 @@ in
         "${mainMod},mouse_up,workspace,e-1"
       ];
 
-      binde = [
+      bindl = [
+        # Audio
+        ",XF86AudioMute,exec,${volume_script} mute"
+        # Media keys
+        ",XF86AudioPlay,exec,${lib.getExe pkgs.playerctl} play-pause"
+        ",XF86AudioPrev,exec,${lib.getExe pkgs.playerctl} previous"
+        ",XF86AudioNext,exec,${lib.getExe pkgs.playerctl} next"
+      ];
+
+      bindel = [
         # Brightness
         ",XF86MonBrightnessUp,   exec, ${brightness_script} up"
         ",XF86MonBrightnessDown, exec, ${brightness_script} down"

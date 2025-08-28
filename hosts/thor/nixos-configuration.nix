@@ -55,6 +55,7 @@
   security.pam.services.krezh.enableGnomeKeyring = true;
   security.pam.services.gdm-password.enableGnomeKeyring = true;
   security.pam.services.gdm.enableGnomeKeyring = true;
+  security.pam.services.sddm.enableGnomeKeyring = true;
   security.pam.services.hyprlock.enableGnomeKeyring = true;
   security.rtkit.enable = true;
   programs.seahorse.enable = true;
@@ -71,6 +72,7 @@
     openssh.enable = true;
     fonts.enable = true;
     steam.enable = true;
+    bluetooth.enable = true;
     openrgb.enable = false;
   };
 
@@ -152,6 +154,8 @@
     };
     amdgpu = {
       opencl.enable = true;
+      initrd.enable = lib.mkDefault true;
+      overdrive.enable = true;
     };
   };
 

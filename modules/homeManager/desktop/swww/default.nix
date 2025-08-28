@@ -17,6 +17,7 @@ in
 
     interval = lib.mkOption {
       type = lib.types.ints.positive;
+      description = "The interval in seconds between wallpaper changes";
       default = 300;
     };
 
@@ -61,6 +62,7 @@ in
         ];
         ExecStart = "${swww}/bin/swww-daemon -q";
         Restart = "on-failure";
+        RestartSec = 5;
       };
       Install.WantedBy = [
         (lib.mkIf config.wayland.windowManager.hyprland.systemd.enable "hyprland-session.target")
@@ -80,6 +82,7 @@ in
         PassEnvironment = [ "PATH" ];
         ExecStart = "${swww-random}/bin/swww-random ${cfg.path} ${toString cfg.interval}";
         Restart = "on-failure";
+        RestartSec = 5;
       };
       Install.WantedBy = [
         (lib.mkIf config.wayland.windowManager.hyprland.systemd.enable "hyprland-session.target")
