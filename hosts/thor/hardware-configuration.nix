@@ -29,9 +29,9 @@
       ];
     };
     consoleLogLevel = 0;
-    #kernelModules = [ "amdgpu" ];
     kernelParams = [
       "ipv6.disable=1"
+      "intel_pstate=disable"
       "split_lock_detect=off"
       "quiet"
       "loglevel=3"
@@ -39,6 +39,7 @@
       "udev.log_level=3"
       "rd.udev.log_level=3"
       "vt.global_cursor_default=0"
+      "module_blacklist=radeon"
     ];
   };
 

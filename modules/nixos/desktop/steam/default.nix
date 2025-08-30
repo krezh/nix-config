@@ -17,8 +17,8 @@ in
     programs.gamemode.enableRenice = true;
     programs.gamemode.settings = {
       custom = {
-        start = "${pkgs.libnotify}/bin/notify-send 'GameMode started'";
-        end = "${pkgs.libnotify}/bin/notify-send 'GameMode ended'";
+        start = "${pkgs.libnotify}/bin/notify-send -t 5000 'GameMode' 'Started'";
+        end = "${pkgs.libnotify}/bin/notify-send -t 5000 'GameMode' 'Ended'";
       };
     };
     environment = {
@@ -55,9 +55,10 @@ in
       };
     };
     systemd.user.services.steam = {
-      enable = false;
+      enable = true;
       description = "Steam (no-GUI background startup)";
       wantedBy = [ "graphical-session.target" ];
+      path = [ "/run/current-system/sw" ];
       serviceConfig = {
         ExecStart = "${lib.getExe pkgs.steam} -nochatui -nofriendsui -silent %U";
         Restart = "on-failure";

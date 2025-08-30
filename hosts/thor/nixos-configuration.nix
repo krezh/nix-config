@@ -57,6 +57,7 @@
   security.pam.services.gdm.enableGnomeKeyring = true;
   security.pam.services.sddm.enableGnomeKeyring = true;
   security.pam.services.hyprlock.enableGnomeKeyring = true;
+  security.pam.services.login.enableGnomeKeyring = true;
   security.rtkit.enable = true;
   programs.seahorse.enable = true;
   services.gnome.gnome-keyring.enable = true;
@@ -79,13 +80,14 @@
   services = {
     displayManager = {
       sddm = {
-        enable = false;
+        enable = true;
         wayland.enable = true;
+        wayland.compositor = "kwin";
         autoNumlock = true;
         package = pkgs.kdePackages.sddm;
       };
       gdm = {
-        enable = true;
+        enable = false;
         wayland = true;
       };
       defaultSession = "hyprland";
