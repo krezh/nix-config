@@ -28,6 +28,7 @@ jobs:
             accept-flake-config = true
             always-allow-substitutes = true
             builders-use-substitutes = true
+          init: none
       - id: set-matrix
         name: Generate Nix Matrix
         run: |
