@@ -15,7 +15,7 @@ env:
   TMPDIR: /tmp
 jobs:
   nix-matrix:
-    runs-on: ubuntu-latest
+    runs-on: nix-config-runner
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -45,7 +45,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.nix-matrix.outputs.matrix) }}
-    runs-on: ${{ matrix.runner }}
+    runs-on: nix-config-runner #${{ matrix.runner }}
     steps:
       - name: Maximize build space 1
         uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be
@@ -144,7 +144,7 @@ jobs:
     needs:
       - nix-build
     name: Nix Build Successful
-    runs-on: ubuntu-latest
+    runs-on: nix-config-runner
     steps:
       - if: ${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}
         name: Check matrix status
