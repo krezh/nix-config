@@ -184,6 +184,8 @@
         nixosModules.default = {
           imports = lib.scanPath.toList { path = ./modules/nixos; };
         };
+
+        evalHosts = flakeLib.evalHosts;
       };
 
       perSystem =
