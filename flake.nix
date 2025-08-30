@@ -179,13 +179,14 @@
             homeUsers = [ ];
           }
         ];
+        evalHosts = flakeLib.evalHosts;
+        top = flakeLib.top;
+
         overlays = import ./overlays { inherit inputs lib; };
         homeManagerModules = lib.scanPath.toList { path = ./modules/homeManager; };
         nixosModules.default = {
           imports = lib.scanPath.toList { path = ./modules/nixos; };
         };
-
-        evalHosts = flakeLib.evalHosts;
       };
 
       perSystem =
