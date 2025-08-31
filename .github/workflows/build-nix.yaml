@@ -15,7 +15,7 @@ env:
   TMPDIR: /tmp
 jobs:
   nix-matrix:
-    runs-on: nix-config-runner
+    runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -45,34 +45,38 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.nix-matrix.outputs.matrix) }}
-    runs-on: nix-config-runner #${{ matrix.runner }}
+    runs-on: ${{ matrix.runner }}
     steps:
-      - name: Maximize build space 1
-        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be
-        with:
-          tool-cache: true
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: true
-          docker-images: true
-          swap-storage: true
-      - name: Maximize build space 2
-        uses: easimon/maximize-build-space@fc881a613ad2a34aca9c9624518214ebc21dfc0c # v10
-        with:
-          root-reserve-mb: 4096
-          swap-size-mb: 4096
-          remove-dotnet: true
-          remove-android: true
-          remove-haskell: true
-          remove-docker-images: true
-          remove-codeql: true
-          build-mount-path: "/nix"
-          build-mount-path-ownership: root
+      # - name: Maximize build space 1
+      #   uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be
+      #   with:
+      #     tool-cache: true
+      #     android: true
+      #     dotnet: true
+      #     haskell: true
+      #     large-packages: true
+      #     docker-images: true
+      #     swap-storage: true
+      # - name: Maximize build space 2
+      #   uses: easimon/maximize-build-space@fc881a613ad2a34aca9c9624518214ebc21dfc0c # v10
+      #   with:
+      #     root-reserve-mb: 4096
+      #     swap-size-mb: 4096
+      #     remove-dotnet: true
+      #     remove-android: true
+      #     remove-haskell: true
+      #     remove-docker-images: true
+      #     remove-codeql: true
+      #     build-mount-path: "/nix"
+      #     build-mount-path-ownership: root
       - name: Checkout repository
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
         with:
           fetch-depth: 1
+      - uses: wimpysworld/nothing-but-nix@main
+        with:
+          hatchet-protocol: "cleave"
+          witness-carnage: true
       - name: Install Nix
         uses: DeterminateSystems/nix-installer-action@21a544727d0c62386e78b4befe52d19ad12692e3 # v17
         with:

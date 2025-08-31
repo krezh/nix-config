@@ -50,6 +50,9 @@ in
       Unit = {
         Description = "A Solution to your Wayland Wallpaper Woes";
         Documentation = "https://github.com/Horus645/swww";
+        Requires = [
+          "graphical-session.target"
+        ];
       };
       Service = {
         PassEnvironment = [
