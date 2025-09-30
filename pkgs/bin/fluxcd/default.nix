@@ -1,12 +1,12 @@
 {
-  buildGo124Module,
+  buildGo125Module,
   fetchFromGitHub,
   fetchzip,
   installShellFiles,
   lib,
   stdenv,
 }:
-buildGo124Module rec {
+buildGo125Module rec {
   pname = "fluxcd";
   # renovate: datasource=github-releases depName=fluxcd/flux2
   version = "2.7.0";
