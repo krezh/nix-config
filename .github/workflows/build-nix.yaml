@@ -24,7 +24,6 @@ env:
     accept-flake-config = true
     always-allow-substitutes = true
     builders-use-substitutes = true
-
 jobs:
   build-systems:
     runs-on: ubuntu-latest
@@ -95,33 +94,27 @@ jobs:
         run: |
           echo "# 🏗️ Build Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-
           if [[ "${{ steps.build.outputs.build_success }}" == "true" ]]; then
             echo "## ✅ All builds succeeded!" >> $GITHUB_STEP_SUMMARY
           else
             echo "## ❌ Some builds failed" >> $GITHUB_STEP_SUMMARY
           fi
-
           echo "" >> $GITHUB_STEP_SUMMARY
-
           # Count results from JSON
           if [[ -f "build-results.json" ]]; then
             total_builds=$(jq '[.results[] | select(.type == "BUILD")] | length' build-results.json)
             successful_builds=$(jq '[.results[] | select(.type == "BUILD" and .success == true)] | length' build-results.json)
             failed_builds=$(jq '[.results[] | select(.type == "BUILD" and .success == false)] | length' build-results.json)
             cached_items=$(jq '[.results[] | select(.type == "CACHED")] | length' build-results.json || echo "0")
-
             echo "### 📊 Build Statistics" >> $GITHUB_STEP_SUMMARY
             echo "- **Total builds:** $total_builds" >> $GITHUB_STEP_SUMMARY
             echo "- **Successful:** $successful_builds" >> $GITHUB_STEP_SUMMARY
             echo "- **Failed:** $failed_builds" >> $GITHUB_STEP_SUMMARY
             echo "- **Cached:** $cached_items" >> $GITHUB_STEP_SUMMARY
             echo "" >> $GITHUB_STEP_SUMMARY
-
             # List what was built
             echo "### 📦 Items Built" >> $GITHUB_STEP_SUMMARY
             jq -r '.results[] | select(.type == "BUILD") | "- " + .attr + (if .success then " ✅" else " ❌" end)' build-results.json >> $GITHUB_STEP_SUMMARY
-
             # Show cached items if any
             if [[ "$cached_items" -gt 0 ]]; then
               echo "" >> $GITHUB_STEP_SUMMARY
