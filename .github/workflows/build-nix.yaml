@@ -88,6 +88,15 @@ jobs:
           available_checks=$(nix eval --json '.#checks.x86_64-linux' --apply 'builtins.attrNames' | jq -r 'join(" ")')
           echo "checks=$available_checks" >> $GITHUB_OUTPUT
 
+      - name: Get Nix settings from flake
+        id: get-nix-settings
+        run: |
+          nix eval --json .#nixosConfigurations.thor.config.nix.settings > nix-settings.json
+          substituters=$(jq -r '.substituters | join(" ")' nix-settings.json)
+          keys=$(jq -r '.["trusted-public-keys"] | join(" ")' nix-settings.json)
+          echo "substituters=$substituters" >> $GITHUB_OUTPUT
+          echo "keys=$keys" >> $GITHUB_OUTPUT
+
       - name: Build systems
         id: build
         run: |
@@ -96,7 +105,9 @@ jobs:
             --no-nom \
             --skip-cached \
             --result-file build-results.json \
-            --result-format json; then
+            --result-format json \
+            --option substituters "${{ steps.get-nix-settings.outputs.substituters }}" \
+            --option trusted-public-keys "${{ steps.get-nix-settings.outputs.keys }}"; then
             echo "build_success=true" >> $GITHUB_OUTPUT
           else
             echo "build_success=false" >> $GITHUB_OUTPUT
