@@ -9,18 +9,6 @@
       "onLeftClick": "swww-random -d ~/wallpapers --fps 60 --step 120 --transition grow --pos mouse -o"
     }
   },
-  "custom/steelseries": {
-    "icon": "󰋎",
-    "label": "{percentage}%",
-    "tooltip": "Current Battery: {percentage}%",
-    "truncationSize": -1,
-    "hideOnEmpty": true,
-    "interval": 60000,
-    "execute": "headsetcontrol -d 0x1038:0x1290 -b | awk -F': ' '/Level/ {print $2}' | sed 's/[^0-9]*//g' | xargs -I{} echo '{\"percentage\": {}}' || echo ''",
-    "actions": {
-      "onLeftClick": "headsetcontrol -d 0x1038:0x1290 -b | awk -F': ' '/Level/ {print $2}' || echo ''"
-    }
-  },
   "custom/github": {
     "icon": "󰊤",
     "label": "{count}",

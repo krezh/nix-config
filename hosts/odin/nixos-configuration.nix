@@ -96,8 +96,6 @@
     };
   };
 
-  services.udev.packages = [ pkgs.headsetcontrol ];
-
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
   networking.wireless.enable = lib.mkForce false;
@@ -134,7 +132,6 @@
     systemPackages = with pkgs; [
       age-plugin-yubikey
       intel-gpu-tools
-      headsetcontrol
     ];
   };
   networking.hostName = "${hostname}";

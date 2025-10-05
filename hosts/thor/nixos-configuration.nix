@@ -131,8 +131,6 @@
   programs.evolution.enable = true;
   programs.sniffnet.enable = true;
 
-  services.udev.packages = [ pkgs.headsetcontrol ];
-
   networking.networkmanager.enable = true;
   networking.networkmanager.wifi.backend = "iwd";
   networking.wireless.enable = lib.mkForce false;
@@ -179,7 +177,6 @@
     systemPackages = with pkgs; [
       amdgpu_top
       age-plugin-yubikey
-      headsetcontrol
       wootility
       nautilus
       libnotify
