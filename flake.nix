@@ -161,7 +161,6 @@
         ];
         ghMatrix = flakeLib.ghMatrix { exclude = [ "nixos-livecd" ]; };
         top = flakeLib.top;
-        listPkgs = flakeLib.listInstalledPackagesByHost self.nixosConfigurations;
 
         overlays = import ./overlays { inherit inputs lib; };
         homeManagerModules = [ ./modules/homeManager ];
