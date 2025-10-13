@@ -6,13 +6,13 @@
 }:
 buildGo124Module rec {
   pname = "talswitcher";
-  version = "2.1.10";
+  version = "2.2.0";
 
   src = fetchFromGitHub {
     owner = "mirceanton";
     repo = "talswitcher";
     rev = "v${version}";
-    hash = "sha256-wQQtOA8GAJ1cxKAbAcsBWXHAXJB6TcgCaFQBv0brOO0=";
+    hash = "sha256-3++3eoMGszlyrRYYJLu4wjUoywhvCOWTUOZEzPfknaI=";
   };
 
   vendorHash = "sha256-SIQHkmNChttaEdIyofm4QVSN/Vr6O6Lu0W7z9atJscs=";
