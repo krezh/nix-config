@@ -7,7 +7,7 @@
 buildGoModule rec {
   pname = "hyprmon";
   # renovate: datasource=github-releases depName=erans/hyprmon
-  version = "0.0.11";
+  version = "0.0.12";
   src = fetchFromGitHub {
     owner = "erans";
     repo = "hyprmon";
