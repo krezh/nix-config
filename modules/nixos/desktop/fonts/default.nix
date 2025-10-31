@@ -59,7 +59,7 @@ in
         source-code-pro
         source-sans-pro
         source-serif-pro
-        ubuntu_font_family # Ubuntu fonts
+        ubuntu-classic # Ubuntu fonts
         unifont # some international languages
         noto-fonts
         noto-fonts-cjk-sans
