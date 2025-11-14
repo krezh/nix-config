@@ -1,5 +1,4 @@
 {
-  hostname,
   lib,
   pkgs,
   inputs,
