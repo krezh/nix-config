@@ -4,7 +4,7 @@
 
 <img src="https://raw.githubusercontent.com/catppuccin/catppuccin/main/assets/palette/macchiato.png" width="500"/>
 
-_... managed with Renovate, and GitHub Actions._ 🤖
+_... managed with Renovate, and GitHub Actions_ 🤖
 
 </div>
 
