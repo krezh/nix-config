@@ -24,6 +24,7 @@
       "json5"
       "log"
       "wakatime"
+      "xml"
     ];
     userSettings = {
       auto_update = false;

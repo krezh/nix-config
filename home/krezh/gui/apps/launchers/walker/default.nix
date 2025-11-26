@@ -37,7 +37,6 @@
         next = [ "Down" ];
         previous = [ "Up" ];
         quick_activate = [ ];
-
       };
       providers = {
         default = [
