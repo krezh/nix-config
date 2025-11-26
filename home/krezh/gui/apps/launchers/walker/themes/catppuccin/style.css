@@ -131,3 +131,8 @@ child:selected .item-box * {
   margin-right: 10px;
   padding: 10px;
 }
+
+/* Hide all keybinds */
+.keybinds {
+  display: none;
+}

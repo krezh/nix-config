@@ -30,7 +30,7 @@ in
       thor = {
         system = "x86_64-linux";
         homeUsers = [ "krezh" ];
-        profiles = [ "desktop" ];
+        profiles = [ "gui" ];
       };
       thor-wsl = {
         system = "x86_64-linux";
@@ -40,22 +40,17 @@ in
       odin = {
         system = "x86_64-linux";
         homeUsers = [ "krezh" ];
-        profiles = [ "desktop" ];
+        profiles = [ "gui" ];
       };
       steamdeck = {
         system = "x86_64-linux";
         homeUsers = [ "krezh" ];
-        profiles = [
-          "desktop"
-          "steamdeck"
-        ];
+        profiles = [ "gui" ];
         extraModules = [ inputs.jovian.nixosModules.default ];
       };
       nixos-livecd = {
         system = "x86_64-linux";
-        homeUsers = [ ];
-        commonHost = false;
-        profiles = [ ];
+        includeCommon = false;
         ci = false;
       };
     };

@@ -23,18 +23,4 @@
       hyprexpo
     ];
   };
-
-  home.packages = with pkgs; [
-    brightnessctl
-    grim
-    slurp
-    wl-clipboard
-    wl-screenrec
-    hyprpicker
-    mission-center
-    hyprmon
-    hyprshade
-    hyprdynamicmonitors
-    bww
-  ];
 }

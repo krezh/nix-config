@@ -5,7 +5,7 @@
     <style>
       <class name="window"></class>
     </style>
-    <property name="resizable">true</property>
+    <property name="resizable">false</property>
     <property name="title">Walker</property>
     <child>
       <object class="GtkBox" id="BoxWrapper">

@@ -46,6 +46,7 @@
     antares
     gulp
     vdhcoapp
+    curlie
 
     # Secrets
     age-plugin-yubikey
