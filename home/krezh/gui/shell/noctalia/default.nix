@@ -256,7 +256,7 @@
         criticalUrgencyDuration = 15;
         doNotDisturb = false;
         enabled = true;
-        location = "top";
+        location = "top-right";
         lowUrgencyDuration = 3;
         monitors = [ ];
         normalUrgencyDuration = 8;

@@ -49,10 +49,6 @@ in
         type = "stdio";
         command = lib.getExe pkgs.mcp-gopls;
       };
-      grafana = {
-        type = "stdio";
-        command = lib.getExe pkgs.mcp-grafana;
-      };
       sequential-thinking = {
         type = "stdio";
         command = "${sequential-thinking-mcp-wrapper}";
@@ -125,12 +121,11 @@ in
           "mcp__gopls"
           "mcp__sequential-thinking"
           "mcp__filesystem"
-          "mcp__grafana"
 
           # Safe web fetch from trusted domains
           "WebFetch(domain:wiki.hyprland.org)"
-          "WebFetch(domain:github.com)"
           "WebFetch(domain:wiki.hypr.land)"
+          "WebFetch(domain:github.com)"
           "WebFetch(domain:raw.githubusercontent.com)"
         ];
         ask = [

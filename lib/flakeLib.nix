@@ -41,6 +41,8 @@ let
       homeUsers = config.homeUsers or [ ];
       desktop = config.desktop or true;
       ci = config.ci or true;
+      # Support profiles, fallback to desktop flag for backward compat
+      userProfiles = config.profiles or (if desktop then [ "desktop" ] else [ ]);
       system = lib.nixosSystem {
         pkgs = mkPkgsWithSystem config.system;
         specialArgs = {
@@ -64,7 +66,8 @@ let
           # Generates and appends the home-manager configuration.
           ++ mkHomeUsers {
             users = homeUsers;
-            inherit hostname desktop;
+            profiles = userProfiles;
+            inherit hostname;
           };
       };
     in
@@ -86,27 +89,36 @@ let
     if lib.pathExists hostPath then commonModules ++ [ (lib.scanPath.toImports hostPath) ] else [ ];
 
   # Generates the home-manager configuration for a list of users.
-  # Automatically imports modules from `home/<username>/common` and
-  # `home/<username>/desktop` (if `desktop` is true).
+  # Automatically imports modules from:
+  #   - `home/<username>/base` (always)
+  #   - `home/<username>/<profile>` (for each profile in list)
   mkHomeUsers =
     {
       users,
       hostname,
-      desktop ? true,
+      profiles ? [ ],
     }:
     lib.optionals (users != [ ]) [
       {
         config.home-manager = {
-          users = lib.genAttrs users (name: {
-            imports = [
-              (lib.scanPath.toImports (lib.relativeToRoot "home/${name}/common"))
-            ]
-            ++ (
-              if desktop then [ (lib.scanPath.toImports (lib.relativeToRoot "home/${name}/desktop")) ] else [ ]
-            )
-            ++ outputs.homeManagerModules;
-            config.home.username = name;
-          });
+          users = lib.genAttrs users (
+            name:
+            let
+              basePath = lib.relativeToRoot "home/${name}/base";
+              # Map profile names to paths
+              profilePaths = map (profile: lib.relativeToRoot "home/${name}/${profile}") profiles;
+            in
+            {
+              imports =
+                # Always load base
+                [ (lib.scanPath.toImports basePath) ]
+                # Load each profile in order
+                ++ (map (path: lib.scanPath.toImports path) profilePaths)
+                # Load shared modules
+                ++ outputs.homeManagerModules;
+              config.home.username = name;
+            }
+          );
           backupFileExtension = "bk";
           useGlobalPkgs = true;
           useUserPackages = true;

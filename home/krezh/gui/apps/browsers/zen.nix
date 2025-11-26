@@ -171,6 +171,8 @@ in
         "dom.battery.enabled" = false;
 
         "gfx.webrender.all" = true;
+        "gfx.webrender.layer-compositor" = true;
+        "media.wmf.zero-copy-nv12-textures-force-enabled" = true;
         "network.http.http3.enabled" = true;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true; # enable userChrome.css
 
