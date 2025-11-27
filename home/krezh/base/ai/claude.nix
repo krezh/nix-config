@@ -37,10 +37,6 @@ in
         type = "stdio";
         command = lib.getExe pkgs.mcp-nixos;
       };
-      socket = {
-        type = "http";
-        url = "https://mcp.socket.dev/";
-      };
       rust-analyzer = {
         type = "stdio";
         command = lib.getExe pkgs.rust-analyzer-mcp;
