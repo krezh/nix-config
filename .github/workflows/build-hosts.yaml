@@ -65,7 +65,6 @@ jobs:
         run: |
           nix run nixpkgs#nix-fast-build -- \
             --skip-cached \
-            --no-nom \
             --debug \
             --flake '.#hosts' \
             --attic-cache ${{ secrets.ATTIC_CACHE }}
