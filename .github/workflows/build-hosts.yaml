@@ -33,7 +33,7 @@ jobs:
       - name: Setup SSH for remote builders
         run: |
           mkdir -p ~/.ssh
-          echo "${{ inputs.remote-builders-ssh-key }}" > ~/.ssh/nix-builder-key
+          echo "${{ secrets.NIX_BUILDER_SSH_KEY }}" > ~/.ssh/nix-builder-key
           chmod 600 ~/.ssh/nix-builder-key
           cat >> ~/.ssh/config <<EOF
           Host *
