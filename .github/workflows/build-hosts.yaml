@@ -24,7 +24,7 @@ concurrency:
 jobs:
   build:
     name: Build Hosts
-    runs-on: ubuntu-latest
+    runs-on: nix-config-runner
     if: ${{ github.event.pull_request.draft == false }}
     steps:
       - name: Checkout
