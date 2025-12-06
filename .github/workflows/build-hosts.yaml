@@ -39,7 +39,7 @@ jobs:
           Host *.kubevirt.svc.cluster.local
             StrictHostKeyChecking accept-new
             IdentityFile ~/.ssh/nix-builder-key
-            User remotebuild
+            User root
           EOF
           chmod 600 ~/.ssh/config
 
