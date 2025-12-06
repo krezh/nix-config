@@ -48,6 +48,7 @@ jobs:
           extra_nix_config: |
             accept-flake-config = true
             always-allow-substitutes = true
+            experimental-features = nix-command flakes cgroups
             max-jobs = 0
             builders = @${{ github.workspace }}/.github/nix-builders.conf
 
