@@ -33,13 +33,12 @@ jobs:
       - name: Setup SSH for remote builders
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.NIX_BUILDER_SSH_KEY }}" | tr -d '\r' > ~/.ssh/nix-builder-key
+          echo "${{ inputs.remote-builders-ssh-key }}" > ~/.ssh/nix-builder-key
           chmod 600 ~/.ssh/nix-builder-key
-          cat > ~/.ssh/config <<EOF
-          Host *.kubevirt.svc.cluster.local
+          cat >> ~/.ssh/config <<EOF
+          Host *
             StrictHostKeyChecking accept-new
             IdentityFile ~/.ssh/nix-builder-key
-            User root
           EOF
           chmod 600 ~/.ssh/config
 
