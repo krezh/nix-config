@@ -63,10 +63,16 @@ jobs:
           skip-push: true
 
       - name: Build all hosts
+        id: build
         run: |
           nix run nixpkgs#nix-eval-jobs -- \
             --flake '.#hosts' \
             --check-cache-status | \
           jq -r '.neededBuilds[]' | \
           sort -u | \
-          xargs -P 3 -I {} nix build --print-build-logs "{}^*"
+          xargs -P 3 -I {} nix build --print-build-logs --out-link result "{}^*"
+
+      - name: Push to Attic
+        if: ${{ success() && !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
+        run: |
+          attic push ${{ secrets.ATTIC_CACHE }} result
