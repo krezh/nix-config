@@ -70,7 +70,7 @@ jobs:
             --check-cache-status | \
           jq -r '.neededBuilds[]' | \
           sort -u | \
-          xargs -P 3 -I {} nix build --print-build-logs --out-link result "{}^*"
+          xargs -P 24 -I {} nix build --print-build-logs --eval-store auto --out-link result "{}^*"
 
       - name: Push to Attic
         if: ${{ success() && !(github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork) }}
