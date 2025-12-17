@@ -22,7 +22,7 @@
 stdenv.mkDerivation rec {
   pname = "pipedash";
   # renovate: datasource=github-releases depName=hcavarsan/pipedash
-  version = "0.0.8";
+  version = "0.0.10";
 
   src = fetchurl {
     url = "https://github.com/hcavarsan/pipedash/releases/download/v${version}/pipedash_${version}_amd64.deb";
