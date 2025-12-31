@@ -22,11 +22,11 @@
 stdenv.mkDerivation rec {
   pname = "pipedash";
   # renovate: datasource=github-releases depName=hcavarsan/pipedash
-  version = "0.0.8";
+  version = "0.1.1";
 
   src = fetchurl {
     url = "https://github.com/hcavarsan/pipedash/releases/download/v${version}/pipedash_${version}_amd64.deb";
-    hash = "sha256-ax5Ok14f/IAhMQoWpyEQH+Xq0LAolPswh2NFkT8+Erc=";
+    hash = "sha256-Ozc3OtgcUP0UVcdQL7VMYxnn6kyTX0a5a1zSNad9b3w=";
   };
 
   nativeBuildInputs = [
