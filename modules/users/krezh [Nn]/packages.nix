@@ -3,7 +3,6 @@
     { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        # Core CLI tools
         curl
         ripgrep
         gh

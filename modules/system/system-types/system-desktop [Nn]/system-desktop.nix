@@ -12,7 +12,6 @@
         bluetooth
         pipewire
         xdg-settings
-        hyprland
       ];
 
       environment.systemPackages = with pkgs; [
@@ -35,7 +34,6 @@
       system-base
       gtk-theme
       xdg-settings
-      hyprland
     ];
   };
 }

@@ -65,6 +65,7 @@ in
         extraSpecialArgs = {
           inherit inputs;
         };
+        sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
       };
 
       system.stateVersion = lib.mkDefault "24.05";
@@ -191,7 +192,6 @@ in
       # Base packages
       environment.systemPackages = with pkgs; [
         wget
-        git
         deadnix
         nix-init
         nix-update

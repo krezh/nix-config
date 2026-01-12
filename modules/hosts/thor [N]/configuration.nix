@@ -14,6 +14,8 @@
         # System hierarchy
         system-desktop
 
+        desktop-utils
+
         # Services
         openssh
         steam
@@ -134,9 +136,6 @@
         mouse.accelProfile = "flat";
         touchpad.accelProfile = "flat";
       };
-      services.udisks2.enable = true;
-      services.devmon.enable = true;
-      services.gvfs.enable = true;
       security.rtkit.enable = true;
 
       # Programs

@@ -21,13 +21,6 @@ in
         users.${username} = {
           imports = [ inputs.self.modules.homeManager.${username} ];
         };
-        backupFileExtension = "bk";
-        useGlobalPkgs = true;
-        useUserPackages = true;
-        extraSpecialArgs = {
-          inherit inputs;
-        };
-        sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
       };
 
       # User account

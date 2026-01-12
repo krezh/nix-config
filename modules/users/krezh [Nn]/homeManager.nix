@@ -1,15 +1,21 @@
+{ inputs, ... }:
+let
+  username = "krezh";
+in
 {
-  inputs,
-  ...
-}:
-{
-  flake.modules.homeManager.krezh.imports = with inputs.self.modules.homeManager; [
-    # Programs (module definitions)
-    kubernetes
-    git
-    atuin
-    television
-    aria2
-    superfile
-  ];
+  flake.modules.homeManager.${username} =
+    { config, ... }:
+    {
+      home = {
+        username = "${username}";
+        sessionVariables = {
+          FLAKE = "${config.home.homeDirectory}/nix-config";
+          NH_FLAKE = "${config.home.homeDirectory}/nix-config";
+          SOPS_AGE_KEY_FILE = "${config.sops.age.keyFile}";
+        };
+      };
+      imports = with inputs.self.modules.homeManager; [
+        system-base
+      ];
+    };
 }
