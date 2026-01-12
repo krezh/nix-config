@@ -27,6 +27,8 @@
 
     flake-parts.url = "github:hercules-ci/flake-parts";
 
+    import-tree.url = "github:vic/import-tree";
+
     devshell = {
       url = "github:numtide/devshell";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -62,7 +64,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # NeoVIM
     nvf = {
       url = "github:notashelf/nvf";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -149,7 +150,7 @@
   };
 
   outputs =
-    inputs@{ flake-parts, ... }:
+    inputs@{ flake-parts, import-tree, ... }:
     flake-parts.lib.mkFlake
       {
         inherit inputs;
@@ -157,16 +158,8 @@
           lib = import ./lib { inherit inputs; };
         };
       }
-      (
-        { lib, ... }:
-        {
-          imports = [
-            inputs.pre-commit-hooks.flakeModule
-            inputs.devshell.flakeModule
-            inputs.treefmt-nix.flakeModule
-            (lib.scanPath.toImports ./flake-parts)
-          ];
-          systems = [ "x86_64-linux" ];
-        }
-      );
+      {
+        imports = (import-tree ./modules).imports;
+        systems = [ "x86_64-linux" ];
+      };
 }
