@@ -6,9 +6,21 @@
   flake.modules.nixos.steamdeck =
     { pkgs, ... }:
     {
+      home-manager.users.krezh = {
+        imports = with inputs.self.modules.homeManager; [
+          system-desktop
+          hyprland
+          desktop-shell
+          terminal
+          editors
+          browsers
+          launchers
+        ];
+      };
       imports = with inputs.self.modules.nixos; [
         # System hierarchy
         system-desktop
+        hyprland
 
         # Services
         openssh
