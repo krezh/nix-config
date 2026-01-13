@@ -8,14 +8,16 @@
       ...
     }:
     {
+      home-manager.users.krezh = {
+        imports = with inputs.self.modules.homeManager; [
+          system-base
+          ai
+        ];
+      };
       imports = with inputs.self.modules.nixos; [
-        # System hierarchy
         system-base
-
-        # User
         krezh
-
-        # External modules
+        ai
         inputs.nixos-wsl.nixosModules.wsl
         (modulesPath + "/profiles/minimal.nix")
       ];

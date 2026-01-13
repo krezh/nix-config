@@ -11,24 +11,15 @@
     }:
     {
       imports = with inputs.self.modules.nixos; [
-        # System hierarchy
         system-desktop
-
         desktop-utils
-
-        # Services
         openssh
         steam
         wireplumber
-
-        # VM
         hyprland
         niri
-
         ai
         docker
-
-        # User
         krezh
       ];
 

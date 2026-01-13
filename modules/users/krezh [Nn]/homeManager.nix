@@ -15,7 +15,12 @@ in
         };
       };
       imports = with inputs.self.modules.homeManager; [
-        system-base
+        kubernetes
+        atuin
+        fastfetch
+        aria2
+        television
+        superfile
       ];
     };
 }

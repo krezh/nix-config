@@ -191,6 +191,7 @@ in
 
       # Base packages
       environment.systemPackages = with pkgs; [
+        git
         wget
         deadnix
         nix-init

@@ -60,7 +60,10 @@
 
         programs.fish.shellAbbrs.lg = "lazygit";
 
-        home.packages = [ pkgs.meld ];
+        home.packages = [
+          pkgs.meld
+          pkgs.git
+        ];
       };
     };
 }

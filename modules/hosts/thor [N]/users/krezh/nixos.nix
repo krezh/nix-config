@@ -3,7 +3,7 @@
   flake.modules.nixos.thor = {
     home-manager.users.krezh = {
       imports = with inputs.self.modules.homeManager; [
-        # system-desktop
+        system-desktop
 
         # Programs (module definitions)
         terminal
@@ -22,7 +22,6 @@
 
         # Gaming
         steam
-        krezh
       ];
     };
   };

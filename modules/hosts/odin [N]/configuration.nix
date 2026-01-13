@@ -10,16 +10,31 @@
       ...
     }:
     {
+      home-manager.users.krezh = {
+        imports = with inputs.self.modules.homeManager; [
+          system-desktop
+          terminal
+          editors
+          browsers
+          media
+          launchers
+          mail
+          ai
+          hyprland
+          desktop-shell
+          desktop-utils
+        ];
+      };
       imports = with inputs.self.modules.nixos; [
-        # System hierarchy
         system-desktop
-
-        # Services
+        desktop-utils
         openssh
-        battery
-        mount
-
-        # User
+        steam
+        wireplumber
+        hyprland
+        niri
+        ai
+        docker
         krezh
       ];
 
@@ -36,7 +51,7 @@
         ];
         kernelPackages = pkgs.linuxPackages_zen;
         loader = {
-          timeout = 1;
+          timeout = 0;
           systemd-boot = {
             enable = true;
             configurationLimit = 5;

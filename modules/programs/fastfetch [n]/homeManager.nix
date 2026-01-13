@@ -1,5 +1,5 @@
 {
-  flake.modules.homeManager.krezh = {
+  flake.modules.homeManager.fastfetch = {
     programs.fastfetch = {
       enable = true;
       settings = {

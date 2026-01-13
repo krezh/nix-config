@@ -656,6 +656,21 @@
         "type": "github"
       }
     },
+    "lognix": {
+      "locked": {
+        "lastModified": 1747801239,
+        "narHash": "sha256-nvFuRxdPpNmf4NF2j0sQDIsXz/nNpLmM7y8X5zPMgeg=",
+        "owner": "hydrz",
+        "repo": "log.nix",
+        "rev": "2c6113c17bdc32c3f29839074231f537224fe6b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hydrz",
+        "repo": "log.nix",
+        "type": "github"
+      }
+    },
     "mnw": {
       "locked": {
         "lastModified": 1758834834,
@@ -1128,6 +1143,7 @@
         "import-tree": "import-tree",
         "jovian": "jovian",
         "kauth": "kauth",
+        "lognix": "lognix",
         "niri": "niri",
         "nix-ai-tools": "nix-ai-tools",
         "nix-cachyos-kernel": "nix-cachyos-kernel",
