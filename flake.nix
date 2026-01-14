@@ -149,6 +149,11 @@
     };
 
     lognix.url = "github:hydrz/log.nix";
+
+    mcp-nixos = {
+      url = "github:utensils/mcp-nixos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

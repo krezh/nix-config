@@ -18,22 +18,8 @@
             };
             nixos = {
               type = "stdio";
-              command = lib.getExe pkgs.mcp-nixos;
-            };
-            rust-analyzer = {
-              type = "stdio";
-              command = lib.getExe pkgs.rust-analyzer-mcp;
-            };
-            gopls = {
-              type = "stdio";
-              command = lib.getExe pkgs.mcp-gopls;
-            };
-            sequential-thinking = {
-              type = "stdio";
-              command = pkgs.writeShellScript "sequential-thinking-mcp-wrapper" ''
-                export PATH="${pkgs.nodejs}/bin:$PATH"
-                exec ${pkgs.nodejs}/bin/npx -y @modelcontextprotocol/server-sequential-thinking "$@"
-              '';
+              command = "${pkgs.uv}/bin/uvx";
+              args = [ "mcp-nixos" ];
             };
             filesystem = {
               type = "stdio";
