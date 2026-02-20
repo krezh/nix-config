@@ -7,13 +7,13 @@
 buildGoModule rec {
   pname = "kubectl-browse-pvc";
   # renovate: datasource=github-releases depName=clbx/kubectl-browse-pvc
-  version = "1.3.0";
+  version = "1.4.0";
 
   src = fetchFromGitHub {
     owner = "clbx";
     repo = "kubectl-browse-pvc";
     rev = "v${version}";
-    hash = "sha256-8O36JLNfrh+/9JqJjeeSEO88uYkoo6OXCraK385tGvM=";
+    hash = "sha256-dw7q28qNS3RcUuPZcDc4JqPNU1JTn1RJMLJ6KSkpjrU=";
   };
 
   sourceRoot = "${src.name}/src";
