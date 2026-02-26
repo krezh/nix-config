@@ -5,8 +5,8 @@ import (
 	"os"
 	"os/exec"
 
+	"charm.land/lipgloss/v2"
 	catppuccin "github.com/catppuccin/go"
-	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/log"
 )
 
