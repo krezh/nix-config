@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/catppuccin/go v0.3.0
-	github.com/charmbracelet/lipgloss v1.1.0
+	github.com/charmbracelet/lipgloss/v2 v2.0.0
 	github.com/charmbracelet/log v0.4.2
 )
 
