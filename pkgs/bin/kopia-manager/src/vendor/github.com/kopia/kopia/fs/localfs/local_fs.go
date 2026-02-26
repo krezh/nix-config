@@ -1,0 +1,192 @@
+package localfs
+
+import (
+	"context"
+	"os"
+	"path/filepath"
+	"time"
+
+	"github.com/pkg/errors"
+
+	"github.com/kopia/kopia/fs"
+)
+
+const numEntriesToRead = 100 // number of directory entries to read in one shot
+
+// Options contains configuration options for localfs operations.
+type Options struct {
+	// IgnoreUnreadableDirEntries, when true, causes unreadable directory entries
+	// to be silently skipped during directory iteration instead of causing errors.
+	IgnoreUnreadableDirEntries bool
+}
+
+// DefaultOptions stores the default options used by localfs functions.
+var DefaultOptions = &Options{}
+
+type filesystemEntry struct {
+	name       string
+	size       int64
+	mtimeNanos int64
+	mode       os.FileMode
+	owner      fs.OwnerInfo
+	device     fs.DeviceInfo
+
+	prefix  string
+	options *Options
+}
+
+func (e *filesystemEntry) Name() string {
+	return e.name
+}
+
+func (e *filesystemEntry) IsDir() bool {
+	return e.mode.IsDir()
+}
+
+func (e *filesystemEntry) Mode() os.FileMode {
+	return e.mode
+}
+
+func (e *filesystemEntry) Size() int64 {
+	return e.size
+}
+
+func (e *filesystemEntry) ModTime() time.Time {
+	return time.Unix(0, e.mtimeNanos)
+}
+
+func (e *filesystemEntry) Sys() any {
+	return nil
+}
+
+func (e *filesystemEntry) fullPath() string {
+	return e.prefix + e.Name()
+}
+
+func (e *filesystemEntry) Owner() fs.OwnerInfo {
+	return e.owner
+}
+
+func (e *filesystemEntry) Device() fs.DeviceInfo {
+	return e.device
+}
+
+func (e *filesystemEntry) LocalFilesystemPath() string {
+	return e.fullPath()
+}
+
+type filesystemDirectory struct {
+	filesystemEntry
+}
+
+type filesystemSymlink struct {
+	filesystemEntry
+}
+
+type filesystemFile struct {
+	filesystemEntry
+}
+
+type filesystemErrorEntry struct {
+	filesystemEntry
+	err error
+}
+
+func (fsd *filesystemDirectory) SupportsMultipleIterations() bool {
+	return true
+}
+
+func (fsd *filesystemDirectory) Size() int64 {
+	// force directory size to always be zero
+	return 0
+}
+
+type fileWithMetadata struct {
+	*os.File
+	options *Options
+}
+
+func (f *fileWithMetadata) Entry() (fs.Entry, error) {
+	fi, err := f.Stat()
+	if err != nil {
+		return nil, errors.Wrap(err, "unable to stat() local file")
+	}
+
+	basename, prefix := splitDirPrefix(f.Name())
+
+	return newFilesystemFile(newEntry(basename, fi, prefix, f.options)), nil
+}
+
+func (fsf *filesystemFile) Open(_ context.Context) (fs.Reader, error) {
+	f, err := os.Open(fsf.fullPath())
+	if err != nil {
+		return nil, errors.Wrap(err, "unable to open local file")
+	}
+
+	return &fileWithMetadata{File: f, options: fsf.options}, nil
+}
+
+func (fsl *filesystemSymlink) Readlink(_ context.Context) (string, error) {
+	//nolint:wrapcheck
+	return os.Readlink(fsl.fullPath())
+}
+
+func (fsl *filesystemSymlink) Resolve(_ context.Context) (fs.Entry, error) {
+	target, err := filepath.EvalSymlinks(fsl.fullPath())
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot resolve symlink for '%q'", fsl.fullPath())
+	}
+
+	return NewEntryWithOptions(target, fsl.options)
+}
+
+func (e *filesystemErrorEntry) ErrorInfo() error {
+	return e.err
+}
+
+// splitDirPrefix returns the directory prefix for a given path - the initial part of the path up to and including the final slash (or backslash on Windows).
+// this is similar to filepath.Dir() and filepath.Base() except splitDirPrefix("\\foo\bar") == "\\foo\", which is unsupported in filepath.
+func splitDirPrefix(s string) (basename, prefix string) {
+	for i := len(s) - 1; i >= 0; i-- {
+		if s[i] == filepath.Separator || s[i] == '/' {
+			return s[i+1:], s[0 : i+1]
+		}
+	}
+
+	return s, ""
+}
+
+// Directory returns fs.Directory for the specified path.
+// It uses DefaultOptions for configuration.
+func Directory(path string) (fs.Directory, error) {
+	return DirectoryWithOptions(path, DefaultOptions)
+}
+
+// DirectoryWithOptions returns fs.Directory for the specified path.
+// It uses the provided Options for configuration.
+func DirectoryWithOptions(path string, options *Options) (fs.Directory, error) {
+	e, err := NewEntryWithOptions(path, options)
+	if err != nil {
+		return nil, err
+	}
+
+	switch e := e.(type) {
+	case *filesystemDirectory:
+		return e, nil
+
+	case *filesystemSymlink:
+		// it's a symbolic link, possibly to a directory, it may work or we may get a ReadDir() error.
+		// this is apparently how VSS mounted snapshots appear on Windows and attempts to os.Readlink() fail on them.
+		return newFilesystemDirectory(e.filesystemEntry), nil
+
+	default:
+		return nil, errors.Errorf("not a directory: %v (was %T)", path, e)
+	}
+}
+
+var (
+	_ fs.Directory  = (*filesystemDirectory)(nil)
+	_ fs.File       = (*filesystemFile)(nil)
+	_ fs.Symlink    = (*filesystemSymlink)(nil)
+	_ fs.ErrorEntry = (*filesystemErrorEntry)(nil)
+)
