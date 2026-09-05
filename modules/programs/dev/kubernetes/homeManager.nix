@@ -40,7 +40,6 @@
           kubectx
           egctl
           inputs.kauth.packages.${pkgs.stdenv.hostPlatform.system}.kauth
-          lfk
           vals
         ]
         ++ [
@@ -52,6 +51,7 @@
           k8s-format
           talswitcher
           kopiur
+          sofka
         ];
 
       catppuccin = {
