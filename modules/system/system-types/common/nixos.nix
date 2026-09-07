@@ -85,6 +85,7 @@
         cachix
         nixfmt
         dix
+        norn
         nix-output-monitor
         comma
         nix-tree

@@ -23,17 +23,6 @@ in
               paths = [ "${config.home.homeDirectory}/Obsidian" ];
               schedule = "daily";
             };
-            wow = {
-              paths = [
-                "${config.home.homeDirectory}/Games/Faugus/battlenet/drive_c/Program Files (x86)/World of Warcraft/_retail_/Interface"
-                "${config.home.homeDirectory}/Games/Faugus/battlenet/drive_c/Program Files (x86)/World of Warcraft/_retail_/WTF"
-              ];
-              schedule = "daily";
-            };
-            claude = {
-              paths = [ "${config.home.homeDirectory}/.claude/projects" ];
-              schedule = "daily";
-            };
           };
         };
       };
