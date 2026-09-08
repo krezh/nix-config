@@ -70,7 +70,7 @@
         };
         dbus.packages = with pkgs; [
           gnome-keyring
-          gcr
+          gcr_4
           seahorse
           libsecret
           libgnome-keyring
