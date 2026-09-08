@@ -1609,6 +1609,7 @@
       "original": {
         "owner": "0xc000022070",
         "repo": "zen-browser-flake",
+        "rev": "ec2c94c95846c36130edb9872a8ca4c203028c84",
         "type": "github"
       }
     },
