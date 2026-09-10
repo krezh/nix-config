@@ -6,16 +6,16 @@
 rustPlatform.buildRustPackage rec {
   pname = "sofka";
   # renovate: datasource=github-releases depName=nklmilojevic/sofka
-  version = "0.25.3";
+  version = "0.25.4";
 
   src = fetchFromGitHub {
     owner = "nklmilojevic";
     repo = "sofka";
     tag = "v${version}";
-    hash = "sha256-e/+cdD8B+yE4tQzk73LdUbAX9ULKn4XJyoBUYb3fVOs=";
+    hash = "sha256-+9NSfISVvMm08+goQN9DfSD4cyXLXaYm8kjmVR5QXBg=";
   };
 
-  cargoHash = "sha256-YNMVlZ50D5thqJE5658h34PYQjxqcOvnAIAB2dbpArg=";
+  cargoHash = "sha256-sgcMyrStu/4HFrmuM1LAraY4q2Jo5CmNoVN9qIaS/5g=";
 
   doCheck = false;
 
