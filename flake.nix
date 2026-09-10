@@ -89,7 +89,7 @@
     };
 
     zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake/e6a3f69206143e49218fdf7642f1f0ed117337cd";
+      url = "github:0xc000022070/zen-browser-flake/36f84edf5f170d460ab3a1723b9283f169b817c7";
       inputs = {
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "home-manager";
